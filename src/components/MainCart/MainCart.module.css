@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=Roboto&family=Roboto+Condensed:wght@700&family=Source+Sans+Pro&display=swap');
+
+.container {
+   width: 1240px;
+   margin: 0 auto;
+   display: flex;
+   flex-direction: column;
+   padding: 160px 80px;
+}
+
+.mainCart__title {
+   font-weight: 700;
+   font-size: 32px;
+   font-family: "Raleway";
+   padding-bottom: 55px;
+}
+
+.item__title {
+   display: inline-block;
+   font-weight: 500;
+   font-size: 30px;
+}
+
+
+
+.firstItem {
+   height: 336px;
+   display: flex;
+   justify-content: space-between;
+   padding: 24px 0 0 0;
+   border-top: 1px solid #E5E5E5;
+   border-bottom: 1px solid #E5E5E5;
+   margin-bottom: 24px;
+}
+
+.item {
+   height: 336px;
+   justify-content: space-between;
+   display: flex;
+   border-bottom: 1px solid #E5E5E5;
+   margin-bottom: 24px;
+
+}
+
+.item__type {
+   font-size: 30px;
+   margin-top: 5px;
+}
+
+.item__price {
+   display: inline-block;
+   margin-top: 20px;
+   font-size: 24px;
+   font-weight: 700;
+   margin-bottom: 20px;
+}
+
+.mainCart__size span {
+   display: inline-block;
+   font-size: 18px;
+   font-family: "Roboto Condensed";
+   margin-bottom: 7px;
+}
+
+.mainCart__sizeGrids {
+   margin-bottom: 16px;
+   display: flex;
+   flex-direction: row;
+}
+
+
+.mainCart__sizeGrid:last-child {
+   margin-right: 0px;
+}
+
+.mainCart__sizeGrid {
+   cursor: pointer;
+   text-align: center;
+   height: 45px;
+   width: 63px;
+   border: 1px solid black;
+   margin-right: 8px;
+
+}
+
+.sizeGridActive {
+   background-color: black;
+   color: white;
+}
+
+
+.mainCart__sizeGrid span {
+   display: inline-block;
+   margin-top: 10px;
+   font-family: "Source Sans Pro";
+   font-size: 16px;
+   font-weight: normal;
+}
+
+.mainCart__color span {
+   display: inline-block;
+   margin-bottom: 8px;
+   font-size: 18px;
+   font-weight: 700;
+   font-family: "Roboto Condensed";
+}
+
+.mainCart__colorGrids {
+   display: flex;
+}
+
+.mainCart__colorGrid {
+   width: 32px;
+   height: 32px;
+   background-color: black;
+   margin-right: 8px;
+}
+
+.colorGridActive {
+   position: absolute;
+   margin-top: -2px;
+   margin-left: -2px;
+   width: 34px;
+   height: 34px;
+   border: 1px #5ECE7B solid;
+}
+
+.rightSide {
+   display: flex;
+}
+
+.middle {
+   height: 288px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+.itemImg {
+   position: relative;
+}
+
+.itemImg img {
+   object-fit: cover;
+   height: 288px;
+   width: 200px;
+}
+
+.prevBtn img {
+   cursor: pointer;
+   object-fit: none;
+
+   top: 248px;
+   left: 128px;
+   width: 24px;
+   height: 24px;
+   background-color: rgba(0, 0, 0, 0.73);
+   position: absolute;
+}
+
+
+.nextBtn img {
+
+   cursor: pointer;
+   object-fit: none;
+   top: 248px;
+   left: 160px;
+   width: 24px;
+   height: 24px;
+   background-color: rgba(0, 0, 0, 0.73);
+   position: absolute;
+
+}
+
+.addItem {
+   text-align: center;
+   width: 45px;
+   height: 45px;
+   font-size: 30px;
+   line-height: 25.6px;
+   border: 1px solid black;
+   cursor: pointer;
+   font-weight: 300;
+}
+
+.deleteItem {
+   text-align: center;
+   width: 45px;
+   height: 45px;
+   font-size: 30px;
+   line-height: 0px;
+   border: 1px solid black;
+   cursor: pointer;
+   font-weight: 300;
+   margin-bottom: 4px;
+}
+
+.deleteItem span {
+   font-family: serif;
+   font-size: 32px;
+   font-weight: lig;
+   display: inline-block;
+   line-height: 10px;
+
+}
+
+.addItem span {
+   font-family: serif;
+   font-size: 32px;
+   display: inline-block;
+   line-height: 42px;
+
+}
+
+.itemCount {
+   font-family: "Raleway";
+   font-size: 24px;
+}
+
+.middle {
+   display: flex;
+   align-items: center;
+   margin-right: 24px;
+}
+
+.label {
+   font-size: 24px;
+}
+
+.number {
+   font-size: 24px;
+   font-weight: 700;
+}
+
+.taxes {
+   margin-bottom: 8px;
+   display: flex;
+   justify-content: space-between;
+}
+
+.quantity {
+   margin-bottom: 8px;
+}
+
+.quantity .number {
+   display: inline-block;
+   margin-top: -5px;
+}
+
+.total {
+   font-weight: 500;
+   display: flex;
+   justify-content: space-between;
+}
+
+.amount {
+   width: 198px;
+}
+
+.orderBtn {
+   cursor: pointer;
+}
+
+.orderBtn a {
+   font-size: 14px;
+   display: inline-block;
+   margin-top: 16px;
+   color: white;
+   font-family: "Raleway";
+   font-weight: 500;
+   padding: 13px 115.5px;
+   background: #5ECE7B;
+}
