@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setPdpItemTC, clearItem } from '../../redux/pdp/actions';
+import { setPdpItemTC, clearItem, setActiveColor, setActiveSize, setActiveSecondOpt, setActiveFirstOpt } from '../../redux/pdp/actions';
 import s from "./PDP.module.css"
 import classnames from 'classnames';
+import Attributes from './Attribute/Attributes';
+import { setSumCountItems, setItemToCart } from '../../redux/cart-reducer';
 
 
 class PDP extends Component {
@@ -12,7 +14,6 @@ class PDP extends Component {
    }
 
    componentDidMount() {
-      console.log(this.props.isPending)
       let id = window.location.href.split("http://localhost:3000/pdp/")[1]
       this.props.setPdpItem(id)
 
@@ -21,10 +22,44 @@ class PDP extends Component {
    componentWillUnmount() {
       this.props.clearItem()
    }
+   setPrices = (prices, activeCurrency) => {
+      for (let i = 0; i < prices.length; i++) {
+         if (prices[i].currency.symbol == activeCurrency.symbol) {
+            return prices[i].currency.symbol + " " + prices[i].amount
+         }
+      }
 
+   }
+   setTotalCount = (items) => {
+      let sum = 1
+      for (let i = 0; i < items.length; i++) {
+         console.log(items[i]);
+         let num = items[i].activeAttributes.itemCount
+         sum += num
+      }
+      return sum
+
+   }
+
+
+   setItemToCart = (item) => {
+      !item?.inStock && this.props.setItemToCart({
+         ...item, activeAttributes: {
+            ...item.activeAttributes = {
+               activeColor: this.props.activeColor,
+               activeSize: this.props.activeSize,
+               activeFirstOpt: this.props.activeFirstOpt,
+               activeSecondOpt: this.props.activeSecondOpt,
+               itemCount: 1,
+               displayPrice: this.setPrices(this.props.item.product.prices, this.props.activeCurrency)
+            }
+         }
+      })
+      !item?.inStock && this.props.setSumCountItems(this.setTotalCount(this.props.items))
+
+   }
    render() {
       return (
-
          <div className={s.PDP}>
             {/* {this.props.isPending && <h1 style={{ paddingTop: 200 }}>Hello World!</h1>} */}
             <div className={s.PDPWrapper} >
@@ -37,36 +72,25 @@ class PDP extends Component {
                <div className={s.PDP__info}>
                   <div className={s.info__title_firm}><span>{this.props.item?.product.brand}</span></div>
                   <div className={s.info__title_type}><span>{this.props.item?.product.name}</span></div>
-                  <div className={s.sizeBlock}>
-                     <span>SIZE:</span>
-                     <div className={s.sizeGrids}>
-                        <div className={s.sizeGrid}><span>XS</span></div>
-                        <div className={classnames(s.sizeGrid, s.sizeGridActive)}><span>S</span></div>
-                        <div className={s.sizeGrid}><span>M</span></div>
-                        <div className={s.sizeGrid}><span>L</span></div>
-                     </div>
-                  </div>
-                  <div className={s.colorBlock}>
-                     <span>COLOR:</span>
-                     <div className={s.colorGrids}>
-
-                        <div className={classnames(s.colorGrid)}>
-                           <div className={s.colorGridActive}></div>
-                        </div>
-                        <div className={s.colorGrid}></div>
-                        <div className={s.colorGrid}></div>
-                     </div>
-                  </div>
+                  <Attributes
+                     setActiveSize={this.props.setActiveSize}
+                     setActiveColor={this.props.setActiveColor}
+                     setActiveFirstOpt={this.props.setActiveFirstOpt}
+                     setActiveSecondOpt={this.props.setActiveSecondOpt}
+                     activeColor={this.props.activeColor}
+                     activeSize={this.props.activeSize}
+                     activeFirstOpt={this.props.activeFirstOpt}
+                     activeSecondOpt={this.props.activeSecondOpt}
+                     attributes={this.props.item?.product.attributes} />
                   <div className={s.priceBlock}>
                      <span>PRICE:</span>
                      <br />
-                     <span>$50.00</span>
+                     <span>{this.props.item?.product.prices ? this.setPrices(this.props.item.product.prices, this.props.activeCurrency) : ""}</span>
                   </div>
-                  <div className={s.addToCart}>
+                  <div onClick={() => this.setItemToCart(this.props.item?.product)} className={s.addToCart}>
                      <a className={s.addToCartBtn}>ADD TO CART</a>
                   </div>
-                  <div className={s.description}>
-                     {this.props.item?.product?.description.replace(/<[^>]+>/g, '')}
+                  <div dangerouslySetInnerHTML={{ __html: this.props.item?.product?.description }} className={s.description}>
                   </div>
                </div>
             </div >
@@ -78,8 +102,14 @@ class PDP extends Component {
 
 
 const mapStateToProps = (state) => ({
-   item: state.pdpTest.item,
-   isPending: state.pdpTest.isPending
+   items: state.cart.items,
+   item: state.pdp.item,
+   isPending: state.pdp.isPending,
+   activeCurrency: state.currency.activeCurrency,
+   activeColor: state.pdp.activeColor,
+   activeSize: state.pdp.activeSize,
+   activeFirstOpt: state.pdp.activeFirstOpt,
+   activeSecondOpt: state.pdp.activeSecondOpt,
 })
 
 
@@ -87,4 +117,10 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
    setPdpItem: setPdpItemTC,
    clearItem: clearItem,
+   setItemToCart: setItemToCart,
+   setActiveColor: setActiveColor,
+   setActiveSize: setActiveSize,
+   setActiveSecondOpt: setActiveSecondOpt,
+   setActiveFirstOpt: setActiveFirstOpt,
+   setSumCountItems: setSumCountItems,
 })(PDP)

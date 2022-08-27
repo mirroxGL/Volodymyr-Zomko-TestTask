@@ -28,6 +28,7 @@
 }
 
 .currency div span {
+   user-select: none;
    display: inline-block;
    margin-left: 20px;
 }

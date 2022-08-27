@@ -3,15 +3,13 @@ import bodyReducer from "./body-reducer";
 import thunk from "redux-thunk"
 import cartReducer from "./cart-reducer"
 import currencyReducer from "./currency-reducer";
-import pdpReducer from "./pdp-reducer";
-import pdpReducerTest from "./pdp"
+import pdpReducer from "./pdp"
 
 let reducers = combineReducers({
    cart: cartReducer,
    currency: currencyReducer,
    body: bodyReducer,
-   pdp: pdpReducer,
-   pdpTest: pdpReducerTest
+   pdp: pdpReducer
 })
 
 const store = createStore(reducers, applyMiddleware(thunk))

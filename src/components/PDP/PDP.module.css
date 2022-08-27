@@ -51,7 +51,8 @@
    font-size: 30px;
 }
 
-.sizeBlock span {
+.attrLabel {
+   text-transform: uppercase;
    display: inline-block;
    line-height: 18px;
    font-family: "Roboto Condensed";
@@ -147,6 +148,7 @@
 }
 
 .addToCartBtn {
+   user-select: none;
    cursor: pointer;
    display: inline-block;
    color: white;

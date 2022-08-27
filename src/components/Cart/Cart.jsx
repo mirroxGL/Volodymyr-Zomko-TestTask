@@ -1,117 +1,63 @@
 import React, { Component } from 'react'
 import s from "./Cart.module.css"
 import classnames from 'classnames';
-import c from "../../assets/images/Product B.png"
 import { NavLink } from 'react-router-dom';
+import CartItem from './CartItem/CartItem';
+
 
 
 export default class Cart extends Component {
    constructor(props) {
       super(props);
       this.toggleFalseRevealCart = this.toggleFalseRevealCart.bind(this)
-
+   }
+   shouldComponentUpdate(nextProps, nextState) {
+      return nextProps != this.props || nextState != this.state
    }
    toggleFalseRevealCart() {
       this.props.toggleCartReveal(false)
    }
+   setTotalPrice(items, activeCurrency) {
 
-
+      let sum = 0
+      let num = 0
+      for (let i = 0; i < items.length; i++) {
+         let price = items[i].prices.find(({ currency }) => currency.label === activeCurrency.label)
+         num = price.amount * items[i].activeAttributes.itemCount
+         sum += num
+      }
+      return <span>{activeCurrency.symbol} {sum.toFixed(2)}</span>
+   }
 
    render() {
       return (
-
          this.props.isToggleCartReveal ? <div className={classnames(s.cart)} >
             <div className={s.cartWrapper}>
                <div className={s.cart__title}>
-                  <h2>My Bag <span>, 3 items</span></h2>
+                  <h2>My Bag <span>, {this.props.itemsSumCount} items</span></h2>
                </div>
                <div className={classnames(s.cart__body)}>
                   <div className={s.cart__items}>
-                     <div className={s.cart__item}>
-                        <div className={s.item__body}>
-                           <div className={s.item__bodyLeft}>
-                              <div className={s.item__title}>
-                                 <span>Apollo Running Short</span>
-                              </div>
-                              <div className={s.item__price}>
-                                 <span>$50.00</span>
-                              </div>
-                              <div className={s.item__sizeBlock}>
-                                 <span>Size:</span>
-                                 <div className={s.size__gridsBlock}>
-                                    <a className={s.sizeGrid}>XS</a>
-                                    <a className={classnames(s.sizeGrid, s.activeSizeGrid)}>S</a>
-                                    <a className={s.sizeGrid}>M</a>
-                                    <a className={s.sizeGrid}>L</a>
-                                 </div>
-                              </div>
-                              <div className={s.item__colorBlock}>
-                                 <span>Color:</span>
-                                 <div className={s.chooseColorBlock}>
-                                    <div className={classnames(s.color)}>
-                                       <div className={s.activeColor}></div>
-                                    </div>
-                                    <div className={classnames(s.color)}></div>
-                                    <div className={classnames(s.color)}></div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div className={s.item__bodyMid}>
-                              <div className={s.item__add}><a>+</a></div>
-                              <span>1</span>
-                              <div className={s.item__delete}><a>-</a></div>
-                           </div>
-                           <div className={s.item__bodyRight}>
-                              <div className={s.item__img}>
-                                 <img src={c} alt="" />
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div className={s.cart__item}>
-                        <div className={s.item__body}>
-                           <div className={s.item__bodyLeft}>
-                              <div className={s.item__title}>
-                                 <span>Jupiter Wayfarer</span>
-                              </div>
-                              <div className={s.item__price}>
-                                 <span>$75.00</span>
-                              </div>
-                              <div className={s.item__sizeBlock}>
-                                 <span>Size:</span>
-                                 <div className={s.size__gridsBlock}>
-                                    <a className={classnames(s.sizeGrid, s.activeSizeGrid)}>S</a>
-                                    <a className={s.sizeGrid}>M</a>
-                                 </div>
-                              </div>
-                              <div className={s.item__colorBlock}>
-                                 <span>Color:</span>
-                                 <div className={s.chooseColorBlock}>
-                                    <div className={classnames(s.color)}>
-                                       <div className={s.activeColor}></div>
-                                    </div>
-                                    <div className={classnames(s.color)}></div>
-                                    <div className={classnames(s.color)}></div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div className={s.item__bodyMid}>
-                              <div className={s.item__add}><a>+</a></div>
-                              <span>2</span>
-                              <div className={s.item__delete}><a>-</a></div>
-                           </div>
-                           <div className={s.item__bodyRight}>
-                              <div className={s.item__img}>
-                                 <img src={c} alt="" />
-                              </div>
-                           </div>
-                        </div>
-                     </div>
+                     <CartItem addItem={this.props.addItem}
+                        substractItem={this.props.substractItem}
+                        activeCurrency={this.props.activeCurrency}
+                        items={this.props.items}
+                        setActiveSize={this.props.setActiveSize}
+                        setActiveColor={this.props.setActiveColor}
+                        setActiveFirstOpt={this.props.setActiveFirstOpt}
+                        setActiveSecondOpt={this.props.setActiveSecondOpt}
+                        activeColor={this.props.activeColor}
+                        activeSize={this.props.activeSize}
+                        activeFirstOpt={this.props.activeFirstOpt}
+                        activeSecondOpt={this.props.activeSecondOpt}
+                     />
                   </div>
-                  <div className={s.totalBlock}>
-                     <span>Total</span>
-                     <span>$200.00</span>
-                  </div>
+               </div>
+            </div>
+            <div className={s.bottomBlock}>
+               <div className={s.totalBlock}>
+                  <span>Total</span>
+                  <span>{this.setTotalPrice(this.props.items, this.props.activeCurrency)}</span>
                </div>
                <div className={s.cartButtonsBlock}>
                   <NavLink onClick={this.toggleFalseRevealCart} to="/cart" className={s.viewBagBtn}>VIEW BAG</NavLink>
@@ -119,8 +65,8 @@ export default class Cart extends Component {
                </div>
             </div>
          </div> : ""
-
-
       )
    }
 }
+
+

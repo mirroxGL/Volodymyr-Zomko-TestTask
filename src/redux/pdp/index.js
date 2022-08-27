@@ -1,12 +1,20 @@
 import {
    SET_ITEM,
    SET_PENDING,
-   CLEAR_ITEM
+   CLEAR_ITEM,
+   SET_ACTIVE_COLOR,
+   SET_ACTIVE_SIZE,
+   SET_ACTIVE_FIRST_OPT,
+   SET_ACTIVE_SECOND_OPT,
 } from "./types.js"
 
 let initialState = {
    item: undefined,
-   isPending: false
+   activeColor: undefined,
+   activeSize: undefined,
+   activeFirstOpt: undefined,
+   activeSecondOpt: undefined,
+   isPending: false,
 }
 
 const pdpReducer = (state = initialState, action) => {
@@ -19,13 +27,39 @@ const pdpReducer = (state = initialState, action) => {
       case CLEAR_ITEM:
          return {
             ...state,
-            item: undefined
+            item: undefined,
+            activeColor: undefined,
+            activeSize: undefined,
+            activeFirstOpt: undefined,
+            activeSecondOpt: undefined,
          }
       case SET_PENDING:
          return {
             ...state,
             isPending: action.payload
          }
+      case SET_ACTIVE_COLOR:
+         return {
+            ...state,
+            activeColor: action.payload
+         }
+      case SET_ACTIVE_SIZE:
+         return {
+            ...state,
+            activeSize: action.payload
+         }
+      case SET_ACTIVE_FIRST_OPT:
+         return {
+            ...state,
+            activeFirstOpt: action.payload
+         }
+      case SET_ACTIVE_SECOND_OPT:
+         return {
+            ...state,
+            activeSecondOpt: action.payload
+         }
+
+
       default:
          return state
    }

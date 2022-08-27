@@ -1,14 +1,24 @@
 import Cart from "./Cart";
 import { compose } from 'redux'
 import React, { Component } from 'react'
-import { toggleCartRevealAC } from "../../redux/cart-reducer";
+import { addItem, setSumCountItems, setItemToCart, substractItem, toggleCartRevealAC, setTotalPrice } from "../../redux/cart-reducer";
 import { connect } from 'react-redux'
+import { setActiveColor, setActiveFirstOpt, setActiveSecondOpt, setActiveSize } from "../../redux/pdp/actions";
+
 
 
 
 const mapStateToProps = (state) => {
    return {
-      isToggleCartReveal: state.cart.isToggleCartReveal
+      totalPrice: state.cart.totalPrice,
+      isToggleCartReveal: state.cart.isToggleCartReveal,
+      itemsSumCount: state.cart.itemsSumCount,
+      items: state.cart.items,
+      activeCurrency: state.currency.activeCurrency,
+      activeColor: state.pdp.activeColor,
+      activeSize: state.pdp.activeSize,
+      activeFirstOpt: state.pdp.activeFirstOpt,
+      activeSecondOpt: state.pdp.activeSecondOpt,
    }
 
 }
@@ -17,7 +27,16 @@ const mapStateToProps = (state) => {
 
 
 const CartContainer = connect(mapStateToProps, {
-   toggleCartReveal: toggleCartRevealAC
+   setTotalPrice: setTotalPrice,
+   setSumCountItems: setSumCountItems,
+   addItem: addItem,
+   substractItem: substractItem,
+   toggleCartReveal: toggleCartRevealAC,
+   setItemToCart: setItemToCart,
+   setActiveColor: setActiveColor,
+   setActiveSize: setActiveSize,
+   setActiveSecondOpt: setActiveSecondOpt,
+   setActiveFirstOpt: setActiveFirstOpt,
 })(Cart)
 
 export default CartContainer

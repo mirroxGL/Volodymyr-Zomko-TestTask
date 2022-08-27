@@ -57,7 +57,7 @@
 }
 
 .item__img {
-   cursor: pointer;
+
    margin-bottom: 24px;
 }
 
@@ -66,7 +66,6 @@
    width: 354px;
    height: 330px;
 }
-
 
 
 .deactivated {
@@ -89,7 +88,6 @@
 }
 
 .item__title {
-   cursor: pointer;
    font-weight: 300;
    font-size: 18px;
    line-height: 28.8px;
@@ -102,11 +100,12 @@
 }
 
 
-.outOfStock .item__img a img {
+.item__50opImg img {
    filter: opacity(50%);
 }
 
 .outOfStock__label {
+   opacity: 100%;
    color: #8D8F9A;
    margin-top: 140px;
    margin-left: 90px;

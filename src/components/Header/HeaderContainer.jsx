@@ -10,7 +10,8 @@ import { toggleCurrencyRevealAC } from "../../redux/currency-reducer";
 const mapStateToProps = (state) => {
    return {
       isToggleCartReveal: state.cart.isToggleCartReveal,
-      isToggleCurrencyReveal: state.currency.isToggleCurrencyReveal
+      isToggleCurrencyReveal: state.currency.isToggleCurrencyReveal,
+      itemsSumCount: state.cart.itemsSumCount,
    }
 
 }

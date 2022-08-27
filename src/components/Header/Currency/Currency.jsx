@@ -24,7 +24,7 @@ export default class Currency extends Component {
    render() {
       return (
          this.props.isToggleCurrencyReveal ? < div className={s.currency} >
-            {this.props.currencies?.map((value, i) => <div onClick={() => this.clickHandler(value.label, value.symbol)} className={classnames(s.currencyItem, this.props.activeCurrency.label == value.label ? s.activeCurrency : 1)}><span>{value.symbol} {value.label}</span></div>)}
+            {this.props.currencies?.map((value, i) => <div key={i} onClick={() => this.clickHandler(value.label, value.symbol)} className={classnames(s.currencyItem, this.props.activeCurrency.label == value.label ? s.activeCurrency : 1)}><span>{value.symbol} {value.label}</span></div>)}
          </div > : ""
       )
    }

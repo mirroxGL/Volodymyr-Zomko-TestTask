@@ -2,7 +2,6 @@ import { bodyAPI } from "../api/api"
 
 const TOGGLE_CURRENCY_REVEAL = "TOGGLE-CURRENCY-REVEAL"
 const SET_CURRENCIES = "SET-CURRENCIES"
-
 const SET_ACTIVE_CURRENCY = "SET-ACTIVE-CURRENCY"
 
 let initialState = {

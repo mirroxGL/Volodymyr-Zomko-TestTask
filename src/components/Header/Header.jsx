@@ -77,7 +77,7 @@ class Header extends Component {
                   </div>
 
                   <div ref={this.cartRef} onClick={this.handleCartMouseClick} className={s.cart}>
-                     <div className={s.itemsCount}><span>3</span></div>
+                     <div style={{ display: this.props.itemsSumCount == 0 && "none" }} className={s.itemsCount}><span>{this.props.itemsSumCount}</span></div>
                      <a><img src={cart} alt="" /></a>
                   </div>
                </div>

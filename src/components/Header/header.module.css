@@ -85,6 +85,7 @@ header {
 }
 
 .currency {
+   user-select: none;
    font-weight: 600;
    cursor: pointer;
    color: black;

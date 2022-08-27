@@ -2,6 +2,9 @@
 
 
 .cart {
+   display: flex;
+   flex-direction: column;
+
    z-index: 30;
    width: 325px;
    height: 677px;
@@ -13,7 +16,14 @@
 }
 
 .cartWrapper {
+   overflow: auto;
+   height: 78%;
+   display: flex;
+   flex-direction: column;
+   position: relative;
    padding: 16px;
+   margin-bottom: auto;
+
 }
 
 .cart__title h2 {
@@ -24,6 +34,11 @@
 .cart__title {
 
    margin-bottom: 32px;
+}
+
+
+.cart__body {
+   position: relative;
 }
 
 .cart__title h2 span {
@@ -41,12 +56,12 @@
 .item__img img {
    width: 121px;
    height: 190px;
-   object-fit: cover;
+   object-fit: contain;
 }
 
 .item__bodyLeft {
    width: 136px;
-   height: 190px;
+
 }
 
 .item__title {
@@ -90,13 +105,14 @@
 }
 
 .sizeGrid {
+   user-select: none;
    margin-right: 5px;
+   min-width: 24px;
+   min-height: 24px;
    cursor: pointer;
    font-size: 14px;
    line-height: 22.4px;
    font-family: 'Source Sans Pro', sans-serif;
-   width: 24px;
-   height: 24px;
    border: 1px solid black;
    text-align: center;
 
@@ -107,6 +123,7 @@
 }
 
 .activeSizeGrid {
+   user-select: none;
    background-color: black;
    color: white;
 }
@@ -119,11 +136,14 @@
 .chooseColorBlock {
    display: flex;
    flex-direction: row;
+   margin-bottom: 8px;
 }
 
 .color {
+   user-select: none;
    cursor: pointer;
    margin-right: 8px;
+
    height: 16px;
    width: 16px;
    background-color: black;
@@ -131,6 +151,7 @@
 }
 
 .activeColor {
+   user-select: none;
    position: absolute;
    margin-top: -2px;
    margin-left: -2px;
@@ -148,6 +169,7 @@
 }
 
 .item__add {
+   user-select: none;
    text-align: center;
    width: 24px;
    height: 24px;
@@ -159,6 +181,7 @@
 }
 
 .item__delete {
+   user-select: none;
    text-align: center;
    width: 24px;
    height: 24px;
@@ -191,21 +214,21 @@
 }
 
 .totalBlock {
+   justify-self: flex-end;
    display: flex;
    justify-content: space-between;
    margin-bottom: 32px;
 }
 
-.totalBlock:first-child {
+.totalBlock {
    font-family: 'Roboto', sans-serif;
-}
-
-.totalBlock:last-child {
    font-weight: 700;
    line-height: 25.6px;
 }
 
+
 .cartButtonsBlock {
+
    display: flex;
    justify-content: space-between;
 }
@@ -231,4 +254,12 @@
    text-decoration: none;
    background: #5ECE7B;
    color: white;
+}
+
+.bottomBlock {
+
+   margin-top: auto;
+   padding: 0 18px 18px 18px;
+   justify-self: flex-end;
+   align-self: flex-end;
 }

@@ -31,6 +31,7 @@ const LOAD_PDP = (itemId) => gql`
       product(id:"${itemId}"){
       id
       name
+      brand
       inStock
       gallery
       description
@@ -42,8 +43,17 @@ const LOAD_PDP = (itemId) => gql`
          }
          amount
       }
-      brand
-      
+      attributes{
+         id
+         name
+         type
+         items{
+           displayValue
+           value
+           id
+         }
+         
+       }
       }
    }
 
