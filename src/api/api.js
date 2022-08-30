@@ -26,6 +26,8 @@ const LOAD_ITEMS = gql`
 
 `
 
+
+
 const LOAD_PDP = (itemId) => gql`
    query{
       product(id:"${itemId}"){
@@ -68,6 +70,14 @@ query{
 }
 
 `
+const LOAD_CATEGORIES = gql`
+   query{
+       categories{ 
+         name 
+      }
+   }
+
+`
 
 export const bodyAPI = {
    async getBodyItems() {
@@ -76,6 +86,13 @@ export const bodyAPI = {
    async getCurrencies() {
       return await request("http://localhost:4000/graphql", LOAD_CURRENCIES);
    }
+}
+
+export const headerAPI = {
+   async getCategories() {
+      return await request("http://localhost:4000/graphql", LOAD_CATEGORIES);
+   },
+
 }
 
 export const pdpAPI = {

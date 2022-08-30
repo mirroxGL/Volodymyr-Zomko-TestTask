@@ -1,12 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=Roboto&family=Roboto+Condensed:wght@700&family=Source+Sans+Pro&display=swap');
 
 .container {
+   position: relative;
    width: 1240px;
+   height: 100%;
    margin: 0 auto;
    display: flex;
    flex-direction: column;
    padding: 160px 80px;
 }
+
+.mainCart {}
+
+.bottomPart {}
+
+
 
 .mainCart__title {
    font-weight: 700;
@@ -75,6 +83,7 @@
 
 .mainCart__sizeGrid {
    cursor: pointer;
+   user-select: none;
    text-align: center;
    height: 45px;
    width: 63px;
@@ -90,6 +99,7 @@
 
 
 .mainCart__sizeGrid span {
+
    display: inline-block;
    margin-top: 10px;
    font-family: "Source Sans Pro";
@@ -106,10 +116,13 @@
 }
 
 .mainCart__colorGrids {
+   margin-bottom: 16px;
    display: flex;
 }
 
 .mainCart__colorGrid {
+   cursor: pointer;
+   user-select: none;
    width: 32px;
    height: 32px;
    background-color: black;
@@ -141,7 +154,7 @@
 }
 
 .itemImg img {
-   object-fit: cover;
+   object-fit: contain;
    height: 288px;
    width: 200px;
 }
@@ -173,6 +186,7 @@
 }
 
 .addItem {
+   user-select: none;
    text-align: center;
    width: 45px;
    height: 45px;
@@ -184,6 +198,7 @@
 }
 
 .deleteItem {
+   user-select: none;
    text-align: center;
    width: 45px;
    height: 45px;
@@ -254,7 +269,7 @@
 }
 
 .amount {
-   width: 198px;
+   width: 220px;
 }
 
 .orderBtn {

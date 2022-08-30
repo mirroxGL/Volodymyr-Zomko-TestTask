@@ -11,6 +11,8 @@ const mapStateToProps = (state) => {
    return {
       items: state.body.items,
       activeCurrency: state.currency.activeCurrency,
+      activeCategory: state.header.activeCategory,
+      activeBodyCategory: state.body.activeBodyCategory
    }
 
 }

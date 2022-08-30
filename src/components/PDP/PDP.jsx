@@ -33,7 +33,6 @@ class PDP extends Component {
    setTotalCount = (items) => {
       let sum = 1
       for (let i = 0; i < items.length; i++) {
-         console.log(items[i]);
          let num = items[i].activeAttributes.itemCount
          sum += num
       }
@@ -41,21 +40,24 @@ class PDP extends Component {
 
    }
 
-
+   //////////////!item?.inStock && /////////////
    setItemToCart = (item) => {
-      !item?.inStock && this.props.setItemToCart({
+      this.props.setItemToCart({
          ...item, activeAttributes: {
             ...item.activeAttributes = {
                activeColor: this.props.activeColor,
                activeSize: this.props.activeSize,
                activeFirstOpt: this.props.activeFirstOpt,
                activeSecondOpt: this.props.activeSecondOpt,
+               activeImage: { img: undefined, index: 0 },
                itemCount: 1,
                displayPrice: this.setPrices(this.props.item.product.prices, this.props.activeCurrency)
             }
          }
       })
-      !item?.inStock && this.props.setSumCountItems(this.setTotalCount(this.props.items))
+
+      //////////////!item?.inStock && /////////////
+      this.props.setSumCountItems(this.setTotalCount(this.props.items))
 
    }
    render() {

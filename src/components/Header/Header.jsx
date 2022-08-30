@@ -16,15 +16,19 @@ import Currency from './Currency/Currency';
 class Header extends Component {
    constructor(props) {
       super(props);
-
-
       this.cartRef = React.createRef();
       this.currencyRef = React.createRef();
       this.hideAllWindows = this.hideAllWindows.bind(this)
+   }
 
+   componentDidMount() {
+      this.props.getCategories()
+   }
 
+   componentDidUpdate() {
 
    }
+
 
    hideAllWindows = () => {
       this.props.toggleCartReveal(false)
@@ -53,6 +57,10 @@ class Header extends Component {
       }
 
    }
+   handleCategoryClick = (category, i) => {
+      this.props.setActiveCategory(category.name)
+      this.props.setActiveBodyCategory(i)
+   }
 
 
 
@@ -63,9 +71,9 @@ class Header extends Component {
             <div className={s.flexNavBlock}>
                <div className={s.categoriesBlock}>
                   <ul className={s.categories}>
-                     <li className={s.categories__item}><a className={s.active} href='/'>Women</a></li>
-                     <li className={s.categories__item}><a href='/'>Men</a></li>
-                     <li className={s.categories__item}><a href='/'>Kids</a></li>
+                     {this.props.categories?.map((category, i) => {
+                        return <li key={i} onClick={() => this.handleCategoryClick(category, i)} className={s.categories__item}><a className={this.props.activeCategory === category.name ? s.active : 0}>{category.name}</a></li>
+                     })}
                   </ul>
                </div>
                <NavLink onClick={this.hideAllWindows} to="/" className={s.logoBlock}>

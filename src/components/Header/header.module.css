@@ -40,14 +40,16 @@ header {
 }
 
 .categories__item {
+   cursor: pointer;
    font-weight: 600;
    text-transform: uppercase;
-   padding: 0 15px 0px 15px;
+
 
 }
 
 
 .categories__item a {
+   padding: 0 15px 20px 15px;
    color: black;
    text-decoration: none;
 
@@ -56,7 +58,7 @@ header {
 .categories__item a.active {
    color: #5ece7b;
 
-   padding: 0 15px 20px 15px;
+
 
    border-bottom: #5ece7b 2px solid;
 

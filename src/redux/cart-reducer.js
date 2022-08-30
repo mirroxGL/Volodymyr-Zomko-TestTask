@@ -5,13 +5,15 @@ const SET_SUM_COUNT_ITEMS = "SET_SUM_COUNT_ITEMS"
 const ADD_ITEM = "ADD_ITEM"
 const SUBSTRACT_ITEM = "SUBTRACT_ITEM"
 const SET_TOTAL_PRICE = "SET_TOTAL_PRICE"
+const SET_TAXES = "SET_TAXES"
 
 
 let initialState = {
    isToggleCartReveal: false,
    items: [],
    itemsSumCount: 0,
-   totalPrice: undefined
+   totalPrice: undefined,
+   taxes: undefined
 }
 
 
@@ -50,6 +52,11 @@ const cartReducer = (state = initialState, action) => {
             ...state,
             totalPrice: { price: action.price, symbol: action.symbol }
          }
+      case SET_TAXES:
+         return {
+            ...state,
+            taxes: { symbol: action.symbol, amount: action.amount }
+         }
 
 
       default:
@@ -79,6 +86,13 @@ export const setTotalPrice = (symbol, price) => ({
    type: SET_TOTAL_PRICE,
    symbol,
    price,
+
+})
+
+export const setTaxes = (symbol, amount) => ({
+   type: SET_TAXES,
+   symbol,
+   amount,
 
 })
 

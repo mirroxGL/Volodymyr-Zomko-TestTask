@@ -32,6 +32,7 @@ const pdpReducer = (state = initialState, action) => {
             activeSize: undefined,
             activeFirstOpt: undefined,
             activeSecondOpt: undefined,
+            activeImage: undefined,
          }
       case SET_PENDING:
          return {

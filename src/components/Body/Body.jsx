@@ -10,11 +10,15 @@ class Body extends Component {
       super(props)
    }
    componentDidMount() {
-      this.props.setBodyItems()
+      this.props.setBodyItems(this.props.activeBodyCategory)
 
 
    }
-   componentDidUpdate() {
+   componentDidUpdate(prevProps) {
+      if (prevProps.activeBodyCategory != this.props.activeBodyCategory) {
+         this.props.setBodyItems(this.props.activeBodyCategory)
+      }
+
    }
 
 
@@ -26,7 +30,7 @@ class Body extends Component {
          <div className={s.bodyBlock}>
             <div className={classnames(s.bodyWrapper)}>
 
-               <div className={s.title}><span>Category name</span></div>
+               <div className={s.title}><span>{this.props.activeCategory}</span></div>
                <div className={s.items}>
 
                   {this.props.items.map((value, i) => <Item
