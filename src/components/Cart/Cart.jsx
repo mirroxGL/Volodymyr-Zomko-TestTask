@@ -61,7 +61,7 @@ export default class Cart extends Component {
                </div>
                <div className={s.cartButtonsBlock}>
                   <NavLink onClick={this.toggleFalseRevealCart} to="/cart" className={s.viewBagBtn}>VIEW BAG</NavLink>
-                  <a className={s.checkOutBtn}>CHECK OUT</a>
+                  <a href='/' className={s.checkOutBtn}><span>CHECK OUT</span></a>
                </div>
             </div>
          </div> : ""

@@ -67,6 +67,7 @@ export default class MainCartItem extends Component {
          this.setActiveImage(item, item.gallery[currImgNumber], currImgNumber)
       }
    }
+
    prevImage = (item, currImgNumber) => {
       if (currImgNumber - 1 > -1) {
          this.setActiveImage(item, item.gallery[currImgNumber - 1], currImgNumber - 1)
@@ -79,7 +80,7 @@ export default class MainCartItem extends Component {
 
    render() {
       return (
-         this.props.items.map((item, i) => <div className={s.firstItem}>
+         this.props.items.map((item, i) => item.activeAttributes.itemCount != 0 && <div className={s.firstItem}>
             <div className={s.leftSide}>
                <div className={s.mainCart__header}>
                   <div className={s.item__title}>{item.brand}</div>
@@ -129,10 +130,8 @@ export default class MainCartItem extends Component {
                         </div>
                      </div>
                   }
-
                })}
             </div>
-
             <div className={s.rightSide}>
                <div className={s.middle}>
                   <div className={s.addItem} onClick={() => this.incrItemHandler(item)}><span>+</span></div>

@@ -21,8 +21,6 @@ const mapStateToProps = (state) => {
 }
 
 
-
-
 const HeaderContainer = connect(mapStateToProps, {
    toggleCartReveal: toggleCartRevealAC,
    toggleCurrencyReveal: toggleCurrencyRevealAC,

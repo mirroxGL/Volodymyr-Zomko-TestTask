@@ -65,7 +65,7 @@ export default class CartItem extends Component {
       return (
          this.props.items.map((item, i) => {
             item.activeAttributes.displayPrice = item.prices ? this.setPrices(item.prices, this.props.activeCurrency) : 0
-            return <div key={i} className={s.cart__item} >
+            return item.activeAttributes.itemCount != 0 && <div key={i} className={s.cart__item} >
                <div className={s.item__body}>
                   <div className={s.item__bodyLeft}>
                      <div className={s.item__title}>
@@ -92,7 +92,7 @@ export default class CartItem extends Component {
                               <span>{attr.name}:</span>
                               <div className={s.size__gridsBlock}>
                                  {attr.items.map((size, i) => {
-                                    return <a onClick={() => this.setActiveSize(item, size.value)} key={i} className={classnames(s.sizeGrid, item.activeAttributes.activeSize == size.value && s.activeSizeGrid)}>{size.value}</a>
+                                    return <a onClick={() => this.setActiveSize(item, size.value)} key={i} className={classnames(s.sizeGrid, item.activeAttributes.activeSize == size.value && s.activeSizeGrid)}><span>{size.value}</span></a>
                                  })}
                               </div>
                            </div>

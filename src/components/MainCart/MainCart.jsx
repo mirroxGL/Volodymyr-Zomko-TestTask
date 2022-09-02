@@ -78,7 +78,7 @@ class MainCart extends Component {
                         </div>
                      </div>
                      <div className={s.orderBtn}>
-                        <a>ORDER</a>
+                        <a href='/'>ORDER</a>
                      </div>
                   </div>
                </div>
