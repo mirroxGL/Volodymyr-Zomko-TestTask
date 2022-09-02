@@ -30,7 +30,6 @@ class MainCart extends Component {
       this.props.setTaxes(this.props.activeCurrency?.symbol, ((this.props.totalPrice?.price) * 0.21).toFixed(2))
    }
 
-
    setTotalPrice(items, activeCurrency) {
       let sum = 0
       let num = 0
@@ -43,7 +42,6 @@ class MainCart extends Component {
    }
 
    render() {
-
       return (
          <div className={s.mainCart}>
             <div className={s.mainCartWrapper}>

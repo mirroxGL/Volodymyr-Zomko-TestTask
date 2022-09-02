@@ -8,6 +8,7 @@ export default class MainCartItem extends Component {
    constructor(props) {
       super(props)
    }
+
    setPrices = (prices, activeCurrency) => {
       for (let i = 0; i < prices.length; i++) {
          if (prices[i].currency.symbol == activeCurrency.symbol) {
@@ -15,7 +16,6 @@ export default class MainCartItem extends Component {
          }
       }
    }
-
    incrItemHandler = (item) => {
       item.activeAttributes.itemCount += 1
       this.props.addItem()
@@ -45,14 +45,12 @@ export default class MainCartItem extends Component {
          this.forceUpdate()
       }
    }
-
    setActiveSecondOpt = (item, opt) => {
       if (item.activeAttributes.activeSecondOpt != opt) {
          item.activeAttributes.activeSecondOpt = opt
          this.forceUpdate()
       }
    }
-
    setActiveImage = (item, img, index) => {
       item.activeAttributes.activeImage.img = img
       item.activeAttributes.activeImage.index = index
@@ -67,7 +65,6 @@ export default class MainCartItem extends Component {
          this.setActiveImage(item, item.gallery[currImgNumber], currImgNumber)
       }
    }
-
    prevImage = (item, currImgNumber) => {
       if (currImgNumber - 1 > -1) {
          this.setActiveImage(item, item.gallery[currImgNumber - 1], currImgNumber - 1)
@@ -76,7 +73,6 @@ export default class MainCartItem extends Component {
          this.setActiveImage(item, item.gallery[0], currImgNumber)
       }
    }
-
 
    render() {
       return (
@@ -146,7 +142,6 @@ export default class MainCartItem extends Component {
                   <div className={s.nextBtn}>
                      <img src={next} onClick={() => item.activeAttributes.activeImage.index != item.gallery.length - 1 && this.nextImage(item, item.activeAttributes.activeImage.index)} alt="" />
                   </div>
-
                </div>
             </div>
          </div>)

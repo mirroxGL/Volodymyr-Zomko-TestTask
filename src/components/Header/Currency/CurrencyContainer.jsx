@@ -12,11 +12,7 @@ const mapStateToProps = (state) => {
       currencies: state.currency.currencies,
       activeCurrency: state.currency.activeCurrency
    }
-
 }
-
-
-
 
 const CurrencyContainer = connect(mapStateToProps, {
    toggleCurrencyReveal: toggleCurrencyRevealAC,

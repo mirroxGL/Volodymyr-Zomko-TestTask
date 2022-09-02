@@ -20,7 +20,6 @@ const mapStateToProps = (state) => {
 
 const BodyContainer = connect(mapStateToProps, {
    setBodyItems: setBodyItemsTC,
-
 })(Body)
 
 export default BodyContainer

@@ -9,18 +9,14 @@ export default class Currency extends Component {
       super(props)
    }
 
-   componentDidMount() {
+   componentDidMount = () => {
       this.props.getCurrencies()
    }
-
    clickHandler = (label, symbol) => {
       this.props.setActiveCurrency(label, symbol)
 
 
    }
-
-
-
    render() {
       return (
          this.props.isToggleCurrencyReveal ? < div className={s.currency} >

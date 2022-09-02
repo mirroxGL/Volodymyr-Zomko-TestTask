@@ -25,7 +25,6 @@ const mapStateToProps = (state) => {
 
 const CartContainer = connect(mapStateToProps, {
    setTotalPrice: setTotalPrice,
-   setSumCountItems: setSumCountItems,
    addItem: addItem,
    substractItem: substractItem,
    toggleCartReveal: toggleCartRevealAC,

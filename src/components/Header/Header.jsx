@@ -25,46 +25,28 @@ class Header extends Component {
       this.props.getCategories()
    }
 
-   componentDidUpdate() {
-
-   }
-
-
    hideAllWindows = () => {
       this.props.toggleCartReveal(false)
       this.props.toggleCurrencyReveal(false)
    }
-
-
-
    handleCartMouseClick = (e) => {
-
       this.props.toggleCurrencyReveal(false)
       this.props.toggleCartReveal(true)
       if (this.props.isToggleCartReveal) {
          this.props.toggleCartReveal(false)
       }
-
-
-
    }
-
    handleCurrencyMouseClick = (e) => {
       this.props.toggleCartReveal(false)
       this.props.toggleCurrencyReveal(true)
       if (this.props.isToggleCurrencyReveal) {
          this.props.toggleCurrencyReveal(false)
       }
-
    }
    handleCategoryClick = (category, i) => {
       this.props.setActiveCategory(category.name)
       this.props.setActiveBodyCategory(i)
    }
-
-
-
-
    render() {
       return (
          <header>

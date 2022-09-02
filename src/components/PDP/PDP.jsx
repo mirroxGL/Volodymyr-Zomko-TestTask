@@ -10,25 +10,22 @@ import { setSumCountItems, setItemToCart } from '../../redux/cart-reducer';
 class PDP extends Component {
    constructor(props) {
       super(props)
-
    }
 
    componentDidMount() {
       let id = window.location.href.split("http://localhost:3000/pdp/")[1]
       this.props.setPdpItem(id)
-
-
    }
    componentWillUnmount() {
       this.props.clearItem()
    }
+
    setPrices = (prices, activeCurrency) => {
       for (let i = 0; i < prices.length; i++) {
          if (prices[i].currency.symbol == activeCurrency.symbol) {
             return prices[i].currency.symbol + " " + prices[i].amount
          }
       }
-
    }
    setTotalCount = (items) => {
       let sum = 1
@@ -37,7 +34,6 @@ class PDP extends Component {
          sum += num
       }
       return sum
-
    }
 
    //////////////!item?.inStock && /////////////

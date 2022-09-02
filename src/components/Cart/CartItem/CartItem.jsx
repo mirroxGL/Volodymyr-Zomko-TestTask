@@ -8,15 +8,12 @@ export default class CartItem extends Component {
 
    }
 
-
    setPrices = (prices, activeCurrency) => {
       for (let i = 0; i < prices.length; i++) {
          if (prices[i].currency.symbol == activeCurrency.symbol) {
             return prices[i].currency.symbol + " " + prices[i].amount
          }
       }
-
-
    }
    incrItem = (item) => {
       item.activeAttributes.itemCount += 1
@@ -33,9 +30,6 @@ export default class CartItem extends Component {
          item.activeAttributes.activeColor = color
          this.forceUpdate()
       }
-
-
-
    }
    setActiveSize = (item, size) => {
       if (item.activeAttributes.activeSize != size) {
@@ -49,7 +43,6 @@ export default class CartItem extends Component {
          this.forceUpdate()
       }
    }
-
    setActiveSecondOpt = (item, opt) => {
       if (item.activeAttributes.activeSecondOpt != opt) {
          item.activeAttributes.activeSecondOpt = opt
@@ -59,7 +52,6 @@ export default class CartItem extends Component {
    shouldComponentUpdate = (nextProps, nextState) => {
       return nextProps.items[0].activeAttributes.activeColor != this.props.items[0].activeAttributes.activeColor
    }
-
 
    render() {
       return (
@@ -117,10 +109,7 @@ export default class CartItem extends Component {
                               </div>
                            </div>
                         }
-
                      })}
-
-
                   </div>
                   <div className={s.item__bodyMid}>
                      <div onClick={() => this.incrItem(item)} className={s.item__add}><a>+</a></div>
@@ -135,8 +124,6 @@ export default class CartItem extends Component {
                </div>
             </div >
          })
-
-
       )
    }
 }
