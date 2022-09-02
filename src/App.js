@@ -1,4 +1,3 @@
-
 import './App.css';
 import { Component } from 'react';
 import { Routes, Route } from "react-router-dom"
@@ -10,25 +9,18 @@ import CurrencyContainer from './components/Header/Currency/CurrencyContainer';
 import PDP from './components/PDP/PDP.jsx';
 
 
-
-
 class App extends Component {
-
   constructor(props) {
     super(props)
-
     this.hideAllWindows = this.hideAllWindows.bind(this)
-
   }
   hideAllWindows() {
     this.props.toggleCartReveal(false)
     this.props.toggleCurrencyReveal(false)
   }
 
-
   render() {
     return (
-
       <div className='wrapper'>
         {this.props.isToggleCartReveal ? <div onClick={this.hideAllWindows} className="deactivated"></div> : ""}
         <HeaderContainer />
@@ -42,7 +34,6 @@ class App extends Component {
       </div>
     )
   }
-
 }
 
 

@@ -76,7 +76,7 @@ export default class MainCartItem extends Component {
 
    render() {
       return (
-         this.props.items.map((item, i) => item.activeAttributes.itemCount != 0 && <div className={s.firstItem}>
+         this.props.items.map((item, i) => item.activeAttributes.itemCount != 0 && <div key={i} className={s.firstItem}>
             <div className={s.leftSide}>
                <div className={s.mainCart__header}>
                   <div className={s.item__title}>{item.brand}</div>
@@ -89,7 +89,7 @@ export default class MainCartItem extends Component {
                         <span>{attr.name}:</span>
                         <div className={s.mainCart__colorGrids}>
                            {attr.items.map((color, i) => {
-                              return <div onClick={() => this.setActiveColor(item, color.value)} key={i} style={color.value == "#FFFFFF" ? { backgroundColor: "#F5F5F5" } : { backgroundColor: color.value }} className={classnames(s.mainCart__colorGrid)}>
+                              return <div key={i} onClick={() => this.setActiveColor(item, color.value)} style={color.value == "#FFFFFF" ? { backgroundColor: "#F5F5F5" } : { backgroundColor: color.value }} className={classnames(s.mainCart__colorGrid)}>
                                  {item.activeAttributes.activeColor == color.value && <div key={i} className={s.colorGridActive}></div>}
                               </div>
                            })}
@@ -101,7 +101,7 @@ export default class MainCartItem extends Component {
                         <span>{attr.name}:</span>
                         <div className={s.mainCart__sizeGrids}>
                            {attr.items.map((size, i) => {
-                              return <a onClick={() => this.setActiveSize(item, size.value)} key={i} className={classnames(s.mainCart__sizeGrid, item.activeAttributes.activeSize == size.value && s.sizeGridActive)}><span>{size.value}</span></a>
+                              return <a key={i} onClick={() => this.setActiveSize(item, size.value)} className={classnames(s.mainCart__sizeGrid, item.activeAttributes.activeSize == size.value && s.sizeGridActive)}><span>{size.value}</span></a>
                            })}
                         </div>
                      </div>
@@ -111,7 +111,7 @@ export default class MainCartItem extends Component {
                         <span>{attr.name}:</span>
                         <div className={s.mainCart__sizeGrids}>
                            {attr.items.map((size, i) => {
-                              return <a onClick={() => this.setActiveFirstOpt(item, size.value)} key={i} className={classnames(s.mainCart__sizeGrid, item.activeAttributes.activeFirstOpt == size.value && s.sizeGridActive)}>{size.value}</a>
+                              return <a key={i} onClick={() => this.setActiveFirstOpt(item, size.value)} className={classnames(s.mainCart__sizeGrid, item.activeAttributes.activeFirstOpt == size.value && s.sizeGridActive)}>{size.value}</a>
                            })}
                         </div>
                      </div>
@@ -121,7 +121,7 @@ export default class MainCartItem extends Component {
                         <span>{attr.name}:</span>
                         <div className={s.mainCart__sizeGrids}>
                            {attr.items.map((size, i) => {
-                              return <a onClick={() => this.setActiveSecondOpt(item, size.value)} key={i} className={classnames(s.mainCart__sizeGrid, item.activeAttributes.activeSecondOpt == size.value && s.sizeGridActive)}>{size.value}</a>
+                              return <a key={i} onClick={() => this.setActiveSecondOpt(item, size.value)} className={classnames(s.mainCart__sizeGrid, item.activeAttributes.activeSecondOpt == size.value && s.sizeGridActive)}>{size.value}</a>
                            })}
                         </div>
                      </div>
@@ -144,7 +144,7 @@ export default class MainCartItem extends Component {
                   </div>
                </div>
             </div>
-         </div>)
+         </div >)
 
       )
    }
