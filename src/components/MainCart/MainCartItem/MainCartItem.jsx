@@ -65,6 +65,7 @@ export default class MainCartItem extends Component {
          this.setActiveImage(item, item.gallery[currImgNumber], currImgNumber)
       }
    }
+
    prevImage = (item, currImgNumber) => {
       if (currImgNumber - 1 > -1) {
          this.setActiveImage(item, item.gallery[currImgNumber - 1], currImgNumber - 1)
