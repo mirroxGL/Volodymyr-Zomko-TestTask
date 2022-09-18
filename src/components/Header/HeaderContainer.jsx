@@ -1,13 +1,10 @@
 import Header from "./Header";
-import { compose } from 'redux'
-import React, { Component } from 'react'
 import { toggleCartRevealAC } from "../../redux/cart-reducer";
 import { connect } from 'react-redux'
 import { toggleCurrencyRevealAC } from "../../redux/currency-reducer";
 import { getCategoriesTC, setActiveCategory } from "../../redux/header-reducer";
 import { setActiveBodyCategory } from "../../redux/body-reducer";
-
-
+import { setPreviousUrl } from "../../redux/app-reducer";
 
 const mapStateToProps = (state) => {
    return {
@@ -15,13 +12,13 @@ const mapStateToProps = (state) => {
       isToggleCurrencyReveal: state.currency.isToggleCurrencyReveal,
       itemsSumCount: state.cart.itemsSumCount,
       activeCategory: state.header.activeCategory,
-      categories: state.header.categories
+      categories: state.header.categories,
+      previousUrl: state.app.previousUrl,
    }
-
 }
 
-
 const HeaderContainer = connect(mapStateToProps, {
+   setPreviousUrl: setPreviousUrl,
    toggleCartReveal: toggleCartRevealAC,
    toggleCurrencyReveal: toggleCurrencyRevealAC,
    setActiveCategory: setActiveCategory,

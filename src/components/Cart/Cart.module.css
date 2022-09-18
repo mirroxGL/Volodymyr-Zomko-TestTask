@@ -200,7 +200,7 @@
    margin-bottom: 4px;
 }
 
-.item__delete a {
+.item__delete div {
    display: inline-block;
    line-height: 20px;
 

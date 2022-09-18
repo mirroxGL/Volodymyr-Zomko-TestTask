@@ -43,12 +43,10 @@ export const setActiveSize = (size) => ({
 })
 
 
-
-
 export const setPdpItemTC = (itemId) => async (dispatch) => {
    dispatch(setPending(true))
    const data = await pdpAPI.getPdpItem(itemId)
-   if (data != undefined) {
+   if (data !== undefined) {
       dispatch(setItem(data))
    }
    dispatch(setPending(false))

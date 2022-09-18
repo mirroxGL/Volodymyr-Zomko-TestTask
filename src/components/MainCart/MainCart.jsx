@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import s from "./MainCart.module.css"
-import classnames from 'classnames';
 import MainCartItem from './MainCartItem/MainCartItem';
 import { connect } from 'react-redux'
 import { setActiveColor, setActiveFirstOpt, setActiveSecondOpt, setActiveSize } from '../../redux/pdp/actions';
@@ -8,19 +7,16 @@ import { addItem, setItemToCart, setSumCountItems, setTaxes, setTotalPrice, subs
 
 
 class MainCart extends Component {
-   constructor(props) {
-      super(props)
 
-   }
    shouldComponentUpdate(nextProps, nextState) {
-      return nextProps != this.props || nextState != this.state
+      return nextProps !== this.props || nextState !== this.state
    }
    componentDidMount = () => {
       this.setFinalDigits()
    }
 
    componentDidUpdate = (prevProps) => {
-      if (prevProps.activeCurrency != this.props.activeCurrency || prevProps.totalPrice?.price != this.props.totalPrice?.price || prevProps.itemsSumCount != this.props.itemsSumCount) {
+      if (prevProps.activeCurrency !== this.props.activeCurrency || prevProps.totalPrice?.price !== this.props.totalPrice?.price || prevProps.itemsSumCount !== this.props.itemsSumCount) {
          this.setFinalDigits()
       }
    }
@@ -40,6 +36,7 @@ class MainCart extends Component {
       }
       this.props.setTotalPrice(activeCurrency.symbol, sum.toFixed(2))
    }
+
 
    render() {
       return (

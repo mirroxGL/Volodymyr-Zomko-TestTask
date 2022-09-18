@@ -1,7 +1,5 @@
 import Cart from "./Cart";
-import { compose } from 'redux'
-import React, { Component } from 'react'
-import { addItem, setSumCountItems, setItemToCart, substractItem, toggleCartRevealAC, setTotalPrice } from "../../redux/cart-reducer";
+import { addItem, setItemToCart, substractItem, toggleCartRevealAC, setTotalPrice } from "../../redux/cart-reducer";
 import { connect } from 'react-redux'
 import { setActiveColor, setActiveFirstOpt, setActiveSecondOpt, setActiveSize } from "../../redux/pdp/actions";
 

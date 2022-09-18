@@ -2,9 +2,11 @@ import { headerAPI } from "../api/api"
 const SET_ACTIVE_CATEGORY = "SET_ACTIVE_CATEGORY"
 const SET_CATEGORIES = "SET_CATEGORIES"
 
+const urlCategory = window.location.href.split("http://localhost:3000/")[1]
+
 let initialState = {
    categories: undefined,
-   activeCategory: "all"
+   activeCategory: urlCategory || "all"
 }
 
 
@@ -37,12 +39,9 @@ export const setCategories = (categories) => ({
 
 export const getCategoriesTC = () => async (dispatch) => {
    let data = await headerAPI.getCategories()
-   if (data != undefined) {
+   if (data !== undefined) {
       dispatch(setCategories(data.categories))
    }
 }
-
-
-
 
 export default headerReducer;

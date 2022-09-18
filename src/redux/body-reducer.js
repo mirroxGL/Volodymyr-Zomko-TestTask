@@ -2,9 +2,11 @@ import { bodyAPI } from "../api/api"
 const SET_BODY_ITEMS = "SET-BODY-ITEMS"
 const SET_ACTIVE_BODY_CATEGORY = "SET_ACTIVE_BODY_CATEGORY"
 
+const urlCategory = window.location.href.split("http://localhost:3000/")[1]
+
 let initialState = {
    items: [],
-   activeBodyCategory: 0
+   activeBodyCategory: urlCategory || "all"
 }
 
 
@@ -13,8 +15,7 @@ const bodyReducer = (state = initialState, action) => {
       case SET_BODY_ITEMS:
          return {
             ...state,
-
-            items: action.items.categories[action.index].products
+            items: action.items.categories.filter(c => c.name === action.category)[0]?.products
          }
       case SET_ACTIVE_BODY_CATEGORY:
          return {
@@ -26,10 +27,10 @@ const bodyReducer = (state = initialState, action) => {
    }
 }
 
-export const setBodyItems = (items, index) => ({
+export const setBodyItems = (items, category) => ({
    type: SET_BODY_ITEMS,
    items,
-   index
+   category
 })
 export const setActiveBodyCategory = (category) => ({
    type: SET_ACTIVE_BODY_CATEGORY,
@@ -38,7 +39,7 @@ export const setActiveBodyCategory = (category) => ({
 
 export const setBodyItemsTC = (index) => async (dispatch) => {
    let data = await bodyAPI.getBodyItems()
-   if (data != undefined) {
+   if (data !== undefined) {
       dispatch(setBodyItems(data, index))
    }
 

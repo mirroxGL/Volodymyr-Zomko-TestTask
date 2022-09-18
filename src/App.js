@@ -8,7 +8,6 @@ import MainCart from './components/MainCart/MainCart';
 import CurrencyContainer from './components/Header/Currency/CurrencyContainer';
 import PDP from './components/PDP/PDP.jsx';
 
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -27,7 +26,10 @@ class App extends Component {
         <CartContainer />
         <CurrencyContainer />
         <Routes>
-          <Route path="/" element={<div onClick={this.hideAllWindows}><BodyContainer /></div>} />
+          <Route path={"/"} element={<div onClick={this.hideAllWindows}><BodyContainer /></div>} />
+          <Route path={"/tech"} element={<div onClick={this.hideAllWindows}><BodyContainer /></div>} />
+          <Route path={"/all"} element={<div onClick={this.hideAllWindows}><BodyContainer /></div>} />
+          <Route path={"/clothes"} element={<div onClick={this.hideAllWindows}><BodyContainer /></div>} />
           <Route path="/cart" element={<div onClick={this.hideAllWindows}><MainCart /></div>} />
           <Route path="/pdp/:itemId" element={<div onClick={this.hideAllWindows}><PDP /></div>} />
         </Routes>

@@ -1,5 +1,5 @@
 
-import { request, GraphQLClient } from 'graphql-request';
+import { request } from 'graphql-request';
 
 import { gql } from "@apollo/client"
 
@@ -19,7 +19,17 @@ const LOAD_ITEMS = gql`
                   symbol
                } 
                   amount
-            } 
+            }
+            attributes{
+               id
+               name
+               type
+               items{
+                 displayValue
+                 value
+                 id
+               }
+             } 
          } 
       }
    }
@@ -54,7 +64,6 @@ const LOAD_PDP = (itemId) => gql`
            value
            id
          }
-         
        }
       }
    }

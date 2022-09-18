@@ -16,6 +16,8 @@
 }
 
 .PDP__smallImg {
+   user-select: none;
+   cursor: pointer;
    margin-bottom: 40px;
 }
 

@@ -3,9 +3,6 @@ import { setActiveCurrency, toggleCurrencyRevealAC } from "../../../redux/curren
 import { connect } from 'react-redux'
 import { getCurrencies } from "../../../redux/currency-reducer";
 
-
-
-
 const mapStateToProps = (state) => {
    return {
       isToggleCurrencyReveal: state.currency.isToggleCurrencyReveal,

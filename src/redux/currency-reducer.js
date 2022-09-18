@@ -55,7 +55,7 @@ export const setActiveCurrency = (label, symbol) => ({
 export const getCurrencies = () => async (dispatch) => {
    let data = await bodyAPI.getCurrencies()
 
-   if (data != undefined) {
+   if (data !== undefined) {
       dispatch(setCurrencies(data.currencies))
    }
 }

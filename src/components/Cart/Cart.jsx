@@ -12,7 +12,7 @@ export default class Cart extends Component {
       this.toggleFalseRevealCart = this.toggleFalseRevealCart.bind(this)
    }
    shouldComponentUpdate(nextProps, nextState) {
-      return nextProps != this.props || nextState != this.state
+      return nextProps !== this.props || nextState !== this.state
    }
    toggleFalseRevealCart() {
       this.props.toggleCartReveal(false)
@@ -42,10 +42,6 @@ export default class Cart extends Component {
                         substractItem={this.props.substractItem}
                         activeCurrency={this.props.activeCurrency}
                         items={this.props.items}
-                        setActiveSize={this.props.setActiveSize}
-                        setActiveColor={this.props.setActiveColor}
-                        setActiveFirstOpt={this.props.setActiveFirstOpt}
-                        setActiveSecondOpt={this.props.setActiveSecondOpt}
                         activeColor={this.props.activeColor}
                         activeSize={this.props.activeSize}
                         activeFirstOpt={this.props.activeFirstOpt}
