@@ -1,24 +1,18 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import s from "./Cart.module.css"
 import classnames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import CartItem from './CartItem/CartItem';
 
-
-
-export default class Cart extends Component {
+export default class Cart extends PureComponent {
    constructor(props) {
       super(props);
       this.toggleFalseRevealCart = this.toggleFalseRevealCart.bind(this)
-   }
-   shouldComponentUpdate(nextProps, nextState) {
-      return nextProps !== this.props || nextState !== this.state
    }
    toggleFalseRevealCart() {
       this.props.toggleCartReveal(false)
    }
    setTotalPrice(items, activeCurrency) {
-
       let sum = 0
       let num = 0
       for (let i = 0; i < items.length; i++) {

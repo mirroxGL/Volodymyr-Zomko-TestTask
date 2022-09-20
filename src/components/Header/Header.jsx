@@ -1,5 +1,5 @@
 import React from 'react'
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import logo from '../.././assets/images/logo.svg'
 import vectorDown from '../.././assets/images/vectorDown.svg'
 import vectorUp from '../.././assets/images/vectorUp.svg'
@@ -7,24 +7,17 @@ import cart from '../.././assets/images/cart.svg'
 import s from "./header.module.css"
 import { NavLink } from 'react-router-dom';
 
-
-
-
-
-class Header extends Component {
+class Header extends PureComponent {
    constructor(props) {
       super(props);
       this.cartRef = React.createRef();
       this.currencyRef = React.createRef();
-
    }
 
    componentDidMount() {
       this.props.getCategories()
    }
-   componentDidUpdate() {
 
-   }
    handleLogoClick = () => {
       this.props.toggleCartReveal(false)
       this.props.toggleCurrencyReveal(false)
@@ -50,7 +43,6 @@ class Header extends Component {
       this.props.setActiveCategory(category)
       this.props.setActiveBodyCategory(category)
       this.props.setPreviousUrl(category)
-
    }
 
    render() {
@@ -71,7 +63,6 @@ class Header extends Component {
                   <div ref={this.currencyRef} onClick={this.handleCurrencyMouseClick} className={s.currencyBlock}>
                      <div className={s.currency}>$<img className={s.vector} src={this.props.isToggleCurrencyReveal ? vectorUp : vectorDown} alt="" /> </div>
                   </div>
-
                   <div ref={this.cartRef} onClick={this.handleCartMouseClick} className={s.cart}>
                      <div style={{ display: this.props.itemsSumCount === 0 && "none" }} className={s.itemsCount}><span>{this.props.itemsSumCount}</span></div>
                      <div><img src={cart} alt="" /></div>
@@ -81,7 +72,6 @@ class Header extends Component {
          </header >
       )
    }
-
 }
 
 

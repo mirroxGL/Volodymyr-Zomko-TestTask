@@ -1,12 +1,9 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { setPdpItemTC, clearItem, setActiveColor, setActiveSize, setActiveSecondOpt, setActiveFirstOpt } from '../../redux/pdp/actions';
+import React, { PureComponent } from 'react'
 import s from "./PDP.module.css"
 import Attributes from './Attribute/Attributes';
-import { setSumCountItems, setItemToCart } from '../../redux/cart-reducer';
 
 
-class PDP extends Component {
+class PDP extends PureComponent {
    constructor(props) {
       super(props)
       this.state = {
@@ -107,28 +104,4 @@ class PDP extends Component {
    }
 }
 
-
-
-const mapStateToProps = (state) => ({
-   items: state.cart.items,
-   item: state.pdp.item,
-   isPending: state.pdp.isPending,
-   activeCurrency: state.currency.activeCurrency,
-   activeColor: state.pdp.activeColor,
-   activeSize: state.pdp.activeSize,
-   activeFirstOpt: state.pdp.activeFirstOpt,
-   activeSecondOpt: state.pdp.activeSecondOpt,
-})
-
-const mapDispatchToProps = {
-   setPdpItem: setPdpItemTC,
-   clearItem: clearItem,
-   setItemToCart: setItemToCart,
-   setActiveColor: setActiveColor,
-   setActiveSize: setActiveSize,
-   setActiveSecondOpt: setActiveSecondOpt,
-   setActiveFirstOpt: setActiveFirstOpt,
-   setSumCountItems: setSumCountItems,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PDP)
+export default PDP

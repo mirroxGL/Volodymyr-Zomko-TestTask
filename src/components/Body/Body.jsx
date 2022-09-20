@@ -1,11 +1,9 @@
-import { Component } from "react"
 import s from "./body.module.css"
 import classnames from 'classnames';
 import Item from "./Item/Item";
+import { PureComponent } from "react";
 
-
-
-class Body extends Component {
+class Body extends PureComponent {
    componentDidMount() {
       this.props.setBodyItems(this.props.activeBodyCategory)
    }
@@ -36,7 +34,6 @@ class Body extends Component {
          </div>
       )
    }
-
 }
 
 

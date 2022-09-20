@@ -4,9 +4,9 @@ import { Routes, Route } from "react-router-dom"
 import HeaderContainer from './components/Header/HeaderContainer';
 import CartContainer from './components/Cart/CartContainer';
 import BodyContainer from './components/Body/BodyContainer';
-import MainCart from './components/MainCart/MainCart';
 import CurrencyContainer from './components/Header/Currency/CurrencyContainer';
-import PDP from './components/PDP/PDP.jsx';
+import { MainCartContainer } from './components/MainCart/MainCartContainer';
+import PDPContainer from './components/PDP/PDPContainer';
 
 class App extends Component {
   constructor(props) {
@@ -30,8 +30,8 @@ class App extends Component {
           <Route path={"/tech"} element={<div onClick={this.hideAllWindows}><BodyContainer /></div>} />
           <Route path={"/all"} element={<div onClick={this.hideAllWindows}><BodyContainer /></div>} />
           <Route path={"/clothes"} element={<div onClick={this.hideAllWindows}><BodyContainer /></div>} />
-          <Route path="/cart" element={<div onClick={this.hideAllWindows}><MainCart /></div>} />
-          <Route path="/pdp/:itemId" element={<div onClick={this.hideAllWindows}><PDP /></div>} />
+          <Route path="/cart" element={<div onClick={this.hideAllWindows}><MainCartContainer /></div>} />
+          <Route path="/pdp/:itemId" element={<div onClick={this.hideAllWindows}><PDPContainer /></div>} />
         </Routes>
       </div>
     )

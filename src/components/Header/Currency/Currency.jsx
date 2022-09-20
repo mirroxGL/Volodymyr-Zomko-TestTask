@@ -1,10 +1,8 @@
 import s from "./Currency.module.css"
 import classnames from 'classnames';
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-export default class Currency extends Component {
-
-
+export default class Currency extends PureComponent {
    componentDidMount = () => {
       this.props.getCurrencies()
    }

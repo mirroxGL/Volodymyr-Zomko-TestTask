@@ -1,7 +1,6 @@
 import Currency from "./Currency";
-import { setActiveCurrency, toggleCurrencyRevealAC } from "../../../redux/currency-reducer";
+import { setActiveCurrency, toggleCurrencyRevealAC, getCurrencies } from "../../../redux/currency-reducer";
 import { connect } from 'react-redux'
-import { getCurrencies } from "../../../redux/currency-reducer";
 
 const mapStateToProps = (state) => {
    return {
@@ -11,11 +10,15 @@ const mapStateToProps = (state) => {
    }
 }
 
-const CurrencyContainer = connect(mapStateToProps, {
-   toggleCurrencyReveal: toggleCurrencyRevealAC,
-   getCurrencies: getCurrencies,
-   setActiveCurrency: setActiveCurrency
-})(Currency)
+const mapDispatchToProps = (dispatch) => {
+   return {
+      toggleCurrencyReveal: (isCurrencyRevealed) => dispatch(toggleCurrencyRevealAC(isCurrencyRevealed)),
+      getCurrencies: () => dispatch(getCurrencies()),
+      setActiveCurrency: (label, symbol) => dispatch(setActiveCurrency(label, symbol))
+   }
+}
+
+const CurrencyContainer = connect(mapStateToProps, mapDispatchToProps)(Currency)
 
 export default CurrencyContainer
 

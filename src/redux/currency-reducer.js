@@ -11,7 +11,6 @@ let initialState = {
 
 }
 
-
 const currencyReducer = (state = initialState, action) => {
    switch (action.type) {
       case TOGGLE_CURRENCY_REVEAL:
@@ -54,7 +53,6 @@ export const setActiveCurrency = (label, symbol) => ({
 
 export const getCurrencies = () => async (dispatch) => {
    let data = await bodyAPI.getCurrencies()
-
    if (data !== undefined) {
       dispatch(setCurrencies(data.currencies))
    }

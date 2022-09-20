@@ -17,14 +17,18 @@ const mapStateToProps = (state) => {
    }
 }
 
-const HeaderContainer = connect(mapStateToProps, {
-   setPreviousUrl: setPreviousUrl,
-   toggleCartReveal: toggleCartRevealAC,
-   toggleCurrencyReveal: toggleCurrencyRevealAC,
-   setActiveCategory: setActiveCategory,
-   setActiveBodyCategory: setActiveBodyCategory,
-   getCategories: getCategoriesTC,
-})(Header)
+const mapDispatchToProps = (dispatch) => {
+   return {
+      setPreviousUrl: (url) => dispatch(setPreviousUrl(url)),
+      toggleCartReveal: (isCartRevealed) => dispatch(toggleCartRevealAC(isCartRevealed)),
+      toggleCurrencyReveal: (isCurrencyRevealed) => dispatch(toggleCurrencyRevealAC(isCurrencyRevealed)),
+      setActiveCategory: (category) => dispatch(setActiveCategory(category)),
+      setActiveBodyCategory: (category) => dispatch(setActiveBodyCategory(category)),
+      getCategories: (categories) => dispatch(getCategoriesTC(categories)),
+   }
+}
+
+const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(Header)
 
 export default HeaderContainer
 

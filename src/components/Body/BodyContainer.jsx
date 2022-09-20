@@ -1,11 +1,7 @@
-
 import { addItem, setItemToCart, setSumCountItems } from "../../redux/cart-reducer";
 import { connect } from 'react-redux'
 import Body from "./Body";
 import { setBodyItemsTC } from "../../redux/body-reducer";
-
-
-
 
 const mapStateToProps = (state) => {
    return {
@@ -17,14 +13,17 @@ const mapStateToProps = (state) => {
    }
 
 }
+const mapDispatchToProps = (dispatch) => {
+   return {
+      setBodyItems: (items, category) => dispatch(setBodyItemsTC(items, category)),
+      setItemToCart: (item) => dispatch(setItemToCart(item)),
+      setSumCountItems: (count) => dispatch(setSumCountItems(count)),
+      addItem: () => dispatch(addItem()),
+   }
+}
 
 
-const BodyContainer = connect(mapStateToProps, {
-   setBodyItems: setBodyItemsTC,
-   setItemToCart: setItemToCart,
-   setSumCountItems: setSumCountItems,
-   addItem: addItem,
-})(Body)
+const BodyContainer = connect(mapStateToProps, mapDispatchToProps)(Body)
 
 export default BodyContainer
 

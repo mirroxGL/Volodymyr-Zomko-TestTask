@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import s from "./../body.module.css"
 import { NavLink } from 'react-router-dom';
 import cart from "../../../assets/images/whiteCart.svg"
 import classnames from 'classnames';
 
-
-
-export default class Item extends Component {
+export default class Item extends PureComponent {
    setItemId = () => {
       this.props.setItemId(this.props.item.id)
    }
@@ -46,14 +44,12 @@ export default class Item extends Component {
          })
       }
       this.props.addItem()
-
    }
-
 
    render() {
       return (
          <div className={s.item__wrapper}>
-            <NavLink className={classnames(s.redirectToPdp)} to={`/pdp/${this.props.item.id}`}>
+            <NavLink className={s.redirectToPdp} to={`/pdp/${this.props.item.id}`}>
                <div className={s.item}>
                   {this.props.item.inStock && <div className={s.outOfStock__label}>OUT OF STOCK</div>}
                   <div className={classnames(s.item__img, this.props.item.inStock && s.item__50opImg)}><img src={this.props.item.gallery[0]} alt="" /></div>

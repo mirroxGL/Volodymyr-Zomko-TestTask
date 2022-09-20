@@ -1,16 +1,10 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import s from "./MainCart.module.css"
 import MainCartItem from './MainCartItem/MainCartItem';
-import { connect } from 'react-redux'
-import { setActiveColor, setActiveFirstOpt, setActiveSecondOpt, setActiveSize } from '../../redux/pdp/actions';
-import { addItem, setItemToCart, setSumCountItems, setTaxes, setTotalPrice, substractItem, toggleCartRevealAC } from '../../redux/cart-reducer';
 
 
-class MainCart extends Component {
+class MainCart extends PureComponent {
 
-   shouldComponentUpdate(nextProps, nextState) {
-      return nextProps !== this.props || nextState !== this.state
-   }
    componentDidMount = () => {
       this.setFinalDigits()
    }
@@ -84,34 +78,4 @@ class MainCart extends Component {
 }
 
 
-const mapStateToProps = (state) => {
-   return {
-      taxes: state.cart.taxes,
-      itemsSumCount: state.cart.itemsSumCount,
-      items: state.cart.items,
-      activeCurrency: state.currency.activeCurrency,
-      activeColor: state.pdp.activeColor,
-      activeSize: state.pdp.activeSize,
-      activeFirstOpt: state.pdp.activeFirstOpt,
-      activeSecondOpt: state.pdp.activeSecondOpt,
-      totalPrice: state.cart.totalPrice
-   }
-
-}
-
-
-
-
-export default connect(mapStateToProps, {
-   setTotalPrice: setTotalPrice,
-   setSumCountItems: setSumCountItems,
-   addItem: addItem,
-   substractItem: substractItem,
-   toggleCartReveal: toggleCartRevealAC,
-   setItemToCart: setItemToCart,
-   setActiveColor: setActiveColor,
-   setActiveSize: setActiveSize,
-   setActiveSecondOpt: setActiveSecondOpt,
-   setActiveFirstOpt: setActiveFirstOpt,
-   setTaxes: setTaxes,
-})(MainCart)
+export default MainCart

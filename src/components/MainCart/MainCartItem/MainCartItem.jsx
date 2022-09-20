@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import s from ".././MainCart.module.css"
 import prev from "../../../assets/images/vectorPrev.svg"
 import next from "../../../assets/images/vectorNext.svg"
 import classnames from 'classnames';
 
-export default class MainCartItem extends Component {
+export default class MainCartItem extends PureComponent {
 
    setPrices = (prices, activeCurrency) => {
       for (let i = 0; i < prices.length; i++) {
@@ -72,6 +72,53 @@ export default class MainCartItem extends Component {
       }
    }
 
+   sizeClasses = (activeAttr, size) => { return classnames(s.mainCart__sizeGrid, activeAttr === size && s.sizeGridActive) }
+
+   mainCartItemBuilder = (attr, i, item) => {
+      if (attr.type === "swatch") {
+         return <div key={i} className={s.mainCart__color}>
+            <span>{attr.name}:</span>
+            <div className={s.mainCart__colorGrids}>
+               {attr.items.map((color, i) => {
+                  return <div key={i} onClick={() => this.setActiveColor(item, color.value)} style={color.value === "#FFFFFF" ? { backgroundColor: "#F5F5F5" } : { backgroundColor: color.value }} className={s.mainCart__colorGrid}>
+                     {item.activeAttributes.activeColor === color.value && <div key={i} className={s.colorGridActive}></div>}
+                  </div>
+               })}
+            </div>
+         </div>
+      }
+      else if (attr.type === "text" & attr.id === "Capacity" || attr.id === "Size") {
+         return <div key={i} className={s.mainCart__size}>
+            <span>{attr.name}:</span>
+            <div className={s.mainCart__sizeGrids}>
+               {attr.items.map((size, i) => {
+                  return <div key={i} onClick={() => this.setActiveSize(item, size.value)} className={this.sizeClasses(item.activeAttributes.activeSize, size.value)}><span>{size.value}</span></div>
+               })}
+            </div>
+         </div>
+      }
+      else if (attr.type === "text" & attr.id === "With USB 3 ports") {
+         return <div key={i} className={s.mainCart__size}>
+            <span>{attr.name}:</span>
+            <div className={s.mainCart__sizeGrids}>
+               {attr.items.map((size, i) => {
+                  return <div key={i} onClick={() => this.setActiveFirstOpt(item, size.value)} className={this.sizeClasses(item.activeAttributes.activeFirstOpt, size.value)}>{size.value}</div>
+               })}
+            </div>
+         </div>
+      }
+      else {
+         return <div key={i} className={s.mainCart__size}>
+            <span>{attr.name}:</span>
+            <div className={s.mainCart__sizeGrids}>
+               {attr.items.map((size, i) => {
+                  return <div key={i} onClick={() => this.setActiveSecondOpt(item, size.value)} className={this.sizeClasses(item.activeAttributes.activeSecondOpt, size.value)}>{size.value}</div>
+               })}
+            </div>
+         </div>
+      }
+   }
+
    render() {
       return (
          this.props.items.map((item, i) => item.activeAttributes.itemCount !== 0 && <div key={i} className={s.firstItem}>
@@ -82,48 +129,7 @@ export default class MainCartItem extends Component {
                </div>
                <span className={s.item__price}>{this.setPrices(item.prices, this.props.activeCurrency)}</span>
                {item.attributes.map((attr, i) => {
-                  if (attr.type === "swatch") {
-                     return <div key={i} className={s.mainCart__color}>
-                        <span>{attr.name}:</span>
-                        <div className={s.mainCart__colorGrids}>
-                           {attr.items.map((color, i) => {
-                              return <div key={i} onClick={() => this.setActiveColor(item, color.value)} style={color.value === "#FFFFFF" ? { backgroundColor: "#F5F5F5" } : { backgroundColor: color.value }} className={classnames(s.mainCart__colorGrid)}>
-                                 {item.activeAttributes.activeColor === color.value && <div key={i} className={s.colorGridActive}></div>}
-                              </div>
-                           })}
-                        </div>
-                     </div>
-                  }
-                  else if (attr.type === "text" & attr.id === "Capacity" || attr.id === "Size") {
-                     return <div key={i} className={s.mainCart__size}>
-                        <span>{attr.name}:</span>
-                        <div className={s.mainCart__sizeGrids}>
-                           {attr.items.map((size, i) => {
-                              return <div key={i} onClick={() => this.setActiveSize(item, size.value)} className={classnames(s.mainCart__sizeGrid, item.activeAttributes.activeSize === size.value && s.sizeGridActive)}><span>{size.value}</span></div>
-                           })}
-                        </div>
-                     </div>
-                  }
-                  else if (attr.type === "text" & attr.id === "With USB 3 ports") {
-                     return <div key={i} className={s.mainCart__size}>
-                        <span>{attr.name}:</span>
-                        <div className={s.mainCart__sizeGrids}>
-                           {attr.items.map((size, i) => {
-                              return <div key={i} onClick={() => this.setActiveFirstOpt(item, size.value)} className={classnames(s.mainCart__sizeGrid, item.activeAttributes.activeFirstOpt === size.value && s.sizeGridActive)}>{size.value}</div>
-                           })}
-                        </div>
-                     </div>
-                  }
-                  else {
-                     return <div key={i} className={s.mainCart__size}>
-                        <span>{attr.name}:</span>
-                        <div className={s.mainCart__sizeGrids}>
-                           {attr.items.map((size, i) => {
-                              return <div key={i} onClick={() => this.setActiveSecondOpt(item, size.value)} className={classnames(s.mainCart__sizeGrid, item.activeAttributes.activeSecondOpt === size.value && s.sizeGridActive)}>{size.value}</div>
-                           })}
-                        </div>
-                     </div>
-                  }
+                  return this.mainCartItemBuilder(attr, i, item)
                })}
             </div>
             <div className={s.rightSide}>
@@ -143,7 +149,6 @@ export default class MainCartItem extends Component {
                </div>
             </div>
          </div >)
-
       )
    }
 }
