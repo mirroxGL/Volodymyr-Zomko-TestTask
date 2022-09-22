@@ -74,6 +74,8 @@ export default class MainCartItem extends PureComponent {
 
    sizeClasses = (activeAttr, size) => { return classnames(s.mainCart__sizeGrid, activeAttr === size && s.sizeGridActive) }
 
+
+   ///////////////////////////////RENDERS/////////////////////////////////
    mainCartItemBuilder = (attr, i, item) => {
       if (attr.type === "swatch") {
          return <div key={i} className={s.mainCart__color}>
@@ -119,35 +121,50 @@ export default class MainCartItem extends PureComponent {
       }
    }
 
-   render() {
+   renderLeftSide = (item) => {
       return (
-         this.props.items.map((item, i) => item.activeAttributes.itemCount !== 0 && <div key={i} className={s.firstItem}>
-            <div className={s.leftSide}>
-               <div className={s.mainCart__header}>
-                  <div className={s.item__title}>{item.brand}</div>
-                  <div className={s.item__type}>{item.name}</div>
-               </div>
-               <span className={s.item__price}>{this.setPrices(item.prices, this.props.activeCurrency)}</span>
-               {item.attributes.map((attr, i) => {
-                  return this.mainCartItemBuilder(attr, i, item)
-               })}
+         <div className={s.leftSide}>
+            <div className={s.mainCart__header}>
+               <div className={s.item__title}>{item.brand}</div>
+               <div className={s.item__type}>{item.name}</div>
             </div>
-            <div className={s.rightSide}>
-               <div className={s.middle}>
-                  <div className={s.addItem} onClick={() => this.incrItemHandler(item)}><span>+</span></div>
-                  <div className={s.itemCount}><span>{item.activeAttributes.itemCount}</span></div>
-                  <div className={s.deleteItem} onClick={() => item.activeAttributes.itemCount !== 0 && this.decrItem(item)}><span>_</span></div>
+            <span className={s.item__price}>{this.setPrices(item.prices, this.props.activeCurrency)}</span>
+            {item.attributes.map((attr, i) => {
+               return this.mainCartItemBuilder(attr, i, item)
+            })}
+         </div>
+      )
+   }
+
+   renderRightSide = (item) => {
+      return (
+         <div className={s.rightSide}>
+            <div className={s.middle}>
+               <div className={s.addItem} onClick={() => this.incrItemHandler(item)}><span>+</span></div>
+               <div className={s.itemCount}><span>{item.activeAttributes.itemCount}</span></div>
+               <div className={s.deleteItem} onClick={() => item.activeAttributes.itemCount !== 0 && this.decrItem(item)}><span>_</span></div>
+            </div>
+            <div className={s.itemImg}>
+               <img src={(item.activeAttributes.activeImage !== undefined && item.activeAttributes.activeImage?.img) || item.gallery[0]} alt="" />
+               <div className={s.prevBtn}>
+                  <img src={prev} onClick={() => item.activeAttributes.activeImage.index !== 0 && this.prevImage(item, item.activeAttributes.activeImage.index)} alt="" />
                </div>
-               <div className={s.itemImg}>
-                  <img src={(item.activeAttributes.activeImage !== undefined && item.activeAttributes.activeImage?.img) || item.gallery[0]} alt="" />
-                  <div className={s.prevBtn}>
-                     <img src={prev} onClick={() => item.activeAttributes.activeImage.index !== 0 && this.prevImage(item, item.activeAttributes.activeImage.index)} alt="" />
-                  </div>
-                  <div className={s.nextBtn}>
-                     <img src={next} onClick={() => item.activeAttributes.activeImage.index !== item.gallery.length - 1 && this.nextImage(item, item.activeAttributes.activeImage.index)} alt="" />
-                  </div>
+               <div className={s.nextBtn}>
+                  <img src={next} onClick={() => item.activeAttributes.activeImage.index !== item.gallery.length - 1 && this.nextImage(item, item.activeAttributes.activeImage.index)} alt="" />
                </div>
             </div>
+         </div>
+      )
+   }
+
+   render() {
+      const {
+         items,
+      } = this.props
+      return (
+         items.map((item, i) => item.activeAttributes.itemCount !== 0 && <div key={i} className={s.firstItem}>
+            {this.renderLeftSide(item)}
+            {this.renderRightSide(item)}
          </div >)
       )
    }

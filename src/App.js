@@ -8,6 +8,7 @@ import CurrencyContainer from './components/Header/Currency/CurrencyContainer';
 import { MainCartContainer } from './components/MainCart/MainCartContainer';
 import PDPContainer from './components/PDP/PDPContainer';
 
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -16,6 +17,12 @@ class App extends Component {
   hideAllWindows() {
     this.props.toggleCartReveal(false)
     this.props.toggleCurrencyReveal(false)
+  }
+  componentDidUpdate(prevProps) {
+    console.log(prevProps.location !== this.props.location)
+    console.log("prev props", prevProps.location)
+    console.log("this props", this.props.location)
+
   }
 
   render() {

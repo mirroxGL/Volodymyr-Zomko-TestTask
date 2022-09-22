@@ -21,33 +21,55 @@ export default class CartItem extends PureComponent {
       this.forceUpdate()
    }
 
-   render() {
+   ///////////////////////////////RENDERS/////////////////////////////////
+   renderLeftSide = (item) => {
       return (
-         this.props.items.map((item, i) => {
-            item.activeAttributes.displayPrice = item.prices ? this.setPrices(item.prices, this.props.activeCurrency) : 0
+         <div className={s.item__bodyLeft}>
+            <div className={s.item__title}>
+               <span><span>{item.brand} </span>{item.name}</span>
+            </div>
+            <div className={s.item__price}>
+               <span>{item.activeAttributes.displayPrice}</span>
+            </div>
+            {item.attributes.map((attr, i) => {
+               return cartAttributesBuilder(attr, i, item)
+            })}
+         </div>
+      )
+   }
+   renderMidSide = (item) => {
+      return (
+         <div className={s.item__bodyMid}>
+            <div onClick={() => this.incrItem(item)} className={s.item__add}><div>+</div></div>
+            <span>{item.activeAttributes.itemCount}</span>
+            <div onClick={() => item.activeAttributes.itemCount !== 0 && this.decrItem(item)} className={s.item__delete}><div>-</div></div>
+         </div>
+      )
+   }
+   renderRightSide = (item) => {
+      return (
+         <div className={s.item__bodyRight}>
+            <div className={s.item__img}>
+               <img alt="" src={item.gallery[0]} />
+            </div>
+         </div>
+      )
+   }
+
+   render() {
+      const {
+         activeCurrency,
+         items
+      } = this.props
+
+      return (
+         items.map((item, i) => {
+            item.activeAttributes.displayPrice = item.prices ? this.setPrices(item.prices, activeCurrency) : 0
             return item.activeAttributes.itemCount !== 0 && <div key={i} className={s.cart__item} >
                <div className={s.item__body}>
-                  <div className={s.item__bodyLeft}>
-                     <div className={s.item__title}>
-                        <span><span>{item.brand} </span>{item.name}</span>
-                     </div>
-                     <div className={s.item__price}>
-                        <span>{item.activeAttributes.displayPrice}</span>
-                     </div>
-                     {item.attributes.map((attr, i) => {
-                        return cartAttributesBuilder(attr, i, item)
-                     })}
-                  </div>
-                  <div className={s.item__bodyMid}>
-                     <div onClick={() => this.incrItem(item)} className={s.item__add}><div>+</div></div>
-                     <span>{item.activeAttributes.itemCount}</span>
-                     <div onClick={() => item.activeAttributes.itemCount !== 0 && this.decrItem(item)} className={s.item__delete}><div>-</div></div>
-                  </div>
-                  <div className={s.item__bodyRight}>
-                     <div className={s.item__img}>
-                        <img alt="" src={item.gallery[0]} />
-                     </div>
-                  </div>
+                  {this.renderLeftSide(item)}
+                  {this.renderMidSide(item)}
+                  {this.renderRightSide(item)}
                </div>
             </div >
          })

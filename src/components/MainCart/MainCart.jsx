@@ -31,6 +31,64 @@ class MainCart extends PureComponent {
       this.props.setTotalPrice(activeCurrency.symbol, sum.toFixed(2))
    }
 
+   ///////////////////////////RENDERS/////////////////////////////
+   renderCartItem = () => {
+      return (
+         <MainCartItem
+            addItem={this.props.addItem}
+            substractItem={this.props.substractItem}
+            activeCurrency={this.props.activeCurrency}
+            items={this.props.items}
+            setActiveSize={this.props.setActiveSize}
+            setActiveColor={this.props.setActiveColor}
+            setActiveFirstOpt={this.props.setActiveFirstOpt}
+            setActiveSecondOpt={this.props.setActiveSecondOpt}
+            activeColor={this.props.activeColor}
+            activeSize={this.props.activeSize}
+            activeFirstOpt={this.props.activeFirstOpt}
+            activeSecondOpt={this.props.activeSecondOpt} />
+      )
+   }
+
+   renderTaxes = () => {
+      return (
+         <div className={s.taxes}>
+            <span className={s.label}>Tax 21%: </span>
+            <span className={s.number}>{this.props.taxes?.symbol} {this.props.taxes?.amount}</span>
+         </div>
+      )
+   }
+   renderQuantity = () => {
+      return (
+         <div className={s.quantity}>
+            <span className={s.label}>Quantity: </span>
+            <span className={s.number}>{this.props.itemsSumCount}</span>
+         </div>
+      )
+   }
+   renderTotal = () => {
+      return (
+         <div className={s.total}>
+            <span className={s.label}>Total: </span>
+            <span className={s.number}>{this.props.totalPrice?.symbol} {this.props.totalPrice?.price}</span>
+         </div>
+      )
+   }
+   renderBottomPart = () => {
+      return (
+         <div className={s.bottomPart}>
+            <div className={s.amount}>
+               {this.renderTaxes()}
+               {this.renderQuantity()}
+               {this.renderTotal()}
+            </div>
+            <div className={s.orderBtn}>
+               <a href='/'>ORDER</a>
+            </div>
+         </div>
+      )
+   }
+
 
    render() {
       return (
@@ -38,38 +96,8 @@ class MainCart extends PureComponent {
             <div className={s.mainCartWrapper}>
                <div className={s.container}>
                   <div className={s.mainCart__title}>CART</div>
-                  <MainCartItem
-                     addItem={this.props.addItem}
-                     substractItem={this.props.substractItem}
-                     activeCurrency={this.props.activeCurrency}
-                     items={this.props.items}
-                     setActiveSize={this.props.setActiveSize}
-                     setActiveColor={this.props.setActiveColor}
-                     setActiveFirstOpt={this.props.setActiveFirstOpt}
-                     setActiveSecondOpt={this.props.setActiveSecondOpt}
-                     activeColor={this.props.activeColor}
-                     activeSize={this.props.activeSize}
-                     activeFirstOpt={this.props.activeFirstOpt}
-                     activeSecondOpt={this.props.activeSecondOpt} />
-                  <div className={s.bottomPart}>
-                     <div className={s.amount}>
-                        <div className={s.taxes}>
-                           <span className={s.label}>Tax 21%: </span>
-                           <span className={s.number}>{this.props.taxes?.symbol} {this.props.taxes?.amount}</span>
-                        </div>
-                        <div className={s.quantity}>
-                           <span className={s.label}>Quantity: </span>
-                           <span className={s.number}>{this.props.itemsSumCount}</span>
-                        </div>
-                        <div className={s.total}>
-                           <span className={s.label}>Total: </span>
-                           <span className={s.number}>{this.props.totalPrice?.symbol} {this.props.totalPrice?.price}</span>
-                        </div>
-                     </div>
-                     <div className={s.orderBtn}>
-                        <a href='/'>ORDER</a>
-                     </div>
-                  </div>
+                  {this.renderCartItem()}
+                  {this.renderBottomPart()}
                </div>
             </div>
          </div>

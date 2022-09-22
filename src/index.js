@@ -6,10 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import store from './redux/redux-store.js';
 import AppContainer from './AppContainer';
+import { createBrowserHistory } from 'history';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
+  <BrowserRouter history={createBrowserHistory()}>
     <Provider store={store}>
       <AppContainer />
     </Provider>

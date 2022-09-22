@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
-import { setSumCountItems, setItemToCart } from '../../redux/cart-reducer';
+import { setSumCountItems, setItemToCart, addItem } from '../../redux/cart-reducer';
 import { setPdpItemTC, clearItem, setActiveColor, setActiveSize, setActiveSecondOpt, setActiveFirstOpt } from '../../redux/pdp/actions';
 import PDP from './PDP';
 
 const mapStateToProps = (state) => ({
+   cartItems: state.cart.items,
    items: state.cart.items,
    item: state.pdp.item,
    isPending: state.pdp.isPending,
@@ -16,6 +17,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
    return {
+      addItem: () => dispatch(addItem()),
       setPdpItem: (itemId) => dispatch(setPdpItemTC(itemId)),
       clearItem: () => dispatch(clearItem()),
       setItemToCart: (item) => dispatch(setItemToCart(item)),

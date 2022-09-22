@@ -13,22 +13,31 @@ class Body extends PureComponent {
       }
    }
 
+
    render() {
+      const { activeCurrency,
+         activeCategory,
+         setItemId,
+         items,
+         cartItems,
+         setItemToCart,
+         setSumCountItems,
+         addItem } = this.props
       return (
          <div className={s.bodyBlock}>
             <div className={classnames(s.bodyWrapper)}>
-               <div className={s.title}><span>{this.props.activeCategory}</span></div>
+               <div className={s.title}><span>{activeCategory}</span></div>
                <div className={s.items}>
-                  {this.props.items.map((value, i) => <Item
-                     activeCurrency={this.props.activeCurrency}
-                     setItemId={this.props.setItemId}
+                  {items.map((value, i) => <Item
+                     activeCurrency={activeCurrency}
+                     setItemId={setItemId}
                      item={value}
-                     items={this.props.items}
-                     cartItems={this.props.cartItems}
+                     items={items}
+                     cartItems={cartItems}
                      key={i}
-                     setItemToCart={this.props.setItemToCart}
-                     setSumCountItems={this.props.setSumCountItems}
-                     addItem={this.props.addItem} />)}
+                     setItemToCart={setItemToCart}
+                     setSumCountItems={setSumCountItems}
+                     addItem={addItem} />)}
                </div>
             </div>
          </div>

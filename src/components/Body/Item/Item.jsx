@@ -5,9 +5,11 @@ import cart from "../../../assets/images/whiteCart.svg"
 import classnames from 'classnames';
 
 export default class Item extends PureComponent {
+
    setItemId = () => {
       this.props.setItemId(this.props.item.id)
    }
+
    setPrices = (prices, activeCurrency) => {
       for (let i = 0; i < prices.length; i++) {
          if (prices[i].currency.symbol === activeCurrency.symbol) {
@@ -47,17 +49,21 @@ export default class Item extends PureComponent {
    }
 
    render() {
+      const { activeCurrency,
+         item,
+         item: { id, inStock, brand, prices, gallery, name }
+      } = this.props
       return (
          <div className={s.item__wrapper}>
-            <NavLink className={s.redirectToPdp} to={`/pdp/${this.props.item.id}`}>
+            <NavLink className={s.redirectToPdp} to={`/pdp/${id}`}>
                <div className={s.item}>
-                  {this.props.item.inStock && <div className={s.outOfStock__label}>OUT OF STOCK</div>}
-                  <div className={classnames(s.item__img, this.props.item.inStock && s.item__50opImg)}><img src={this.props.item.gallery[0]} alt="" /></div>
-                  <div className={s.item__title}>{this.props.item.brand} {this.props.item.name}</div>
-                  <div className={s.item__price}>{this.props.item.prices ? this.setPrices(this.props.item.prices, this.props.activeCurrency) : ""}</div>
+                  {inStock && <div className={s.outOfStock__label}>OUT OF STOCK</div>}
+                  <div className={classnames(s.item__img, inStock && s.item__50opImg)}><img src={gallery[0]} alt="" /></div>
+                  <div className={s.item__title}>{brand} {name}</div>
+                  <div className={s.item__price}>{prices ? this.setPrices(prices, activeCurrency) : ""}</div>
                </div>
             </NavLink>
-            <div onClick={() => this.setItemToCart(this.props.item)} style={{ display: this.props.item.inStock && "none" }} className={s.cart}><img src={cart} alt="" /></div>
+            <div onClick={() => this.setItemToCart(item)} style={{ display: inStock && "none" }} className={s.cart}><img src={cart} alt="" /></div>
          </div >
       )
    }
