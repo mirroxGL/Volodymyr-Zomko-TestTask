@@ -2,6 +2,20 @@ import Currency from "./Currency";
 import { setActiveCurrency, toggleCurrencyRevealAC, getCurrencies } from "../../../redux/currency-reducer";
 import { connect } from 'react-redux'
 
+import React, { Component } from 'react'
+
+class CurrencyContainer extends Component {
+   clickHandler = (label, symbol) => {
+      this.props.setActiveCurrency(label, symbol)
+   }
+   render() {
+      return (
+         <Currency {...this.props} clickHandler={this.clickHandler} />
+      )
+   }
+}
+
+
 const mapStateToProps = (state) => {
    return {
       isToggleCurrencyReveal: state.currency.isToggleCurrencyReveal,
@@ -18,8 +32,7 @@ const mapDispatchToProps = (dispatch) => {
    }
 }
 
-const CurrencyContainer = connect(mapStateToProps, mapDispatchToProps)(Currency)
+export default connect(mapStateToProps, mapDispatchToProps)(CurrencyContainer)
 
-export default CurrencyContainer
 
 

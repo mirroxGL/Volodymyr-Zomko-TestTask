@@ -1,38 +1,19 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import s from "./Cart.module.css"
 import classnames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import CartItem from './CartItem/CartItem';
+import CartItemsContainer from './CartItems/CartItemsContainer';
 
-export default class Cart extends PureComponent {
-   constructor(props) {
-      super(props);
-      this.toggleFalseRevealCart = this.toggleFalseRevealCart.bind(this)
-   }
-   toggleFalseRevealCart() {
-      this.props.toggleCartReveal(false)
-   }
-   setTotalPrice(items, activeCurrency) {
-      let sum = 0
-      let num = 0
-      for (let i = 0; i < items.length; i++) {
-         let price = items[i].prices.find(({ currency }) => currency.label === activeCurrency.label)
-         num = price.amount * items[i].activeAttributes.itemCount
-         sum += num
-      }
-      return <span>{activeCurrency.symbol} {sum.toFixed(2)}</span>
-   }
-
-   ///////////////////////////////RENDERS/////////////////////////////////
+export default class Cart extends Component {
    renderBottomBlock = () => {
       return (
          <div className={s.bottomBlock}>
             <div className={s.totalBlock}>
                <span>Total</span>
-               <span>{this.setTotalPrice(this.props.items, this.props.activeCurrency)}</span>
+               <span>{this.props.setTotalPrice(this.props.items, this.props.activeCurrency)}</span>
             </div>
             <div className={s.cartButtonsBlock}>
-               <NavLink onClick={this.toggleFalseRevealCart} to="/cart" className={s.viewBagBtn}>VIEW BAG</NavLink>
+               <NavLink onClick={() => this.props.toggleFalseRevealCart()} to="/cart" className={s.viewBagBtn}>VIEW BAG</NavLink>
                <a href='/' className={s.checkOutBtn}><span>CHECK OUT</span></a>
             </div>
          </div>
@@ -42,14 +23,9 @@ export default class Cart extends PureComponent {
       return (
          <div className={classnames(s.cart__body)}>
             <div className={s.cart__items}>
-               <CartItem addItem={this.props.addItem}
-                  substractItem={this.props.substractItem}
+               <CartItemsContainer
                   activeCurrency={this.props.activeCurrency}
                   items={this.props.items}
-                  activeColor={this.props.activeColor}
-                  activeSize={this.props.activeSize}
-                  activeFirstOpt={this.props.activeFirstOpt}
-                  activeSecondOpt={this.props.activeSecondOpt}
                />
             </div>
          </div>

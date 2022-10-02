@@ -1,4 +1,4 @@
-import s from "../Cart.module.css"
+import s from "../../Cart.module.css"
 import classnames from 'classnames';
 
 const sizeClasses = (activeAttr, size) => {
@@ -33,7 +33,7 @@ const cartAttributesBuilder = (attr, i, item) => {
          <span>{attr.name}:</span>
          <div className={s.size__gridsBlock}>
             {attr.items.map((size, i) => {
-               return <div key={i} className={sizeClasses(item.activeAttributes.activeFirstOpt, size.value)}>{size.value}</div>
+               return <div key={i} className={sizeClasses(item.activeAttributes.activeFirstOpt, size.value)}><span>{size.value}</span></div>
             })}
          </div>
       </div>
@@ -43,7 +43,7 @@ const cartAttributesBuilder = (attr, i, item) => {
          <span>{attr.name}:</span>
          <div className={s.size__gridsBlock}>
             {attr.items.map((size, i) => {
-               return <div key={i} className={sizeClasses(item.activeAttributes.activeSecondOpt, size.value)}>{size.value}</div>
+               return <div key={i} className={sizeClasses(item.activeAttributes.activeSecondOpt, size.value)}><span>{size.value}</span></div>
             })}
          </div>
       </div>

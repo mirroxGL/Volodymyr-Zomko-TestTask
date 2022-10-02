@@ -167,42 +167,45 @@
 }
 
 
-
-
-
 .cart__item {
    margin-bottom: 40px;
 }
 
 .item__add {
+   background-color: Transparent;
    user-select: none;
    text-align: center;
    width: 24px;
    height: 24px;
-   font-size: 30px;
    line-height: 25.6px;
    border: 1px solid black;
    cursor: pointer;
-   font-weight: 300;
+}
+
+.item__add div {
+   font-size: 21px;
+   font-family: serif;
+   margin-top: -2px;
+   margin-left: -1px;
+}
+
+.item__delete div {
+   font-family: 'Courier New', Courier, monospace;
+   font-size: 22px;
+   margin-top: 2px;
+   margin-left: -1.5px;
 }
 
 .item__delete {
+   background-color: Transparent;
    user-select: none;
    text-align: center;
    width: 24px;
    height: 24px;
-   font-size: 30px;
    line-height: 0px;
    border: 1px solid black;
    cursor: pointer;
-   font-weight: 300;
    margin-bottom: 4px;
-}
-
-.item__delete div {
-   display: inline-block;
-   line-height: 20px;
-
 }
 
 .item__bodyMid {

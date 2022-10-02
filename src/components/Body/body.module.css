@@ -19,6 +19,7 @@
 }
 
 .cart {
+   border-color: transparent;
    opacity: 0;
    cursor: pointer;
    border-radius: 50%;

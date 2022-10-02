@@ -36,7 +36,7 @@
 
 
 .firstItem {
-   height: 336px;
+   min-height: 336px;
    display: flex;
    justify-content: space-between;
    padding: 24px 0 0 0;
@@ -202,6 +202,8 @@
 }
 
 .deleteItem {
+   position: relative;
+   background-color: transparent;
    user-select: none;
    text-align: center;
    width: 45px;
@@ -215,15 +217,25 @@
 }
 
 .deleteItem span {
+   position: absolute;
+   left: 13.5px;
+   top: 0;
+   display: inline-block;
    font-family: serif;
    font-size: 32px;
    font-weight: lig;
    display: inline-block;
    line-height: 10px;
+}
+
+.addItem {
+   background-color: transparent;
 
 }
 
+
 .addItem span {
+   background-color: transparent;
    font-family: serif;
    font-size: 32px;
    display: inline-block;

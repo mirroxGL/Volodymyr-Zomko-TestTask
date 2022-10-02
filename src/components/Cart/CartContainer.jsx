@@ -1,32 +1,46 @@
 import Cart from "./Cart";
-import { addItem, substractItem, toggleCartRevealAC, setTotalPrice } from "../../redux/cart-reducer";
+import { toggleCartRevealAC } from "../../redux/cart-reducer";
 import { connect } from 'react-redux'
+
+import React, { Component } from 'react'
+
+class CartContainer extends Component {
+   toggleFalseRevealCart = () => {
+      this.props.toggleCartReveal(false)
+   }
+   setTotalPrice = (items, activeCurrency) => {
+      let sum = 0
+      let num = 0
+      for (let i = 0; i < items.length; i++) {
+         let price = items[i].prices.find(({ currency }) => currency.label === activeCurrency.label)
+         num = price.amount * items[i].activeAttributes.itemCount
+         sum += num
+      }
+      return <span>{activeCurrency.symbol} {sum.toFixed(2)}</span>
+   }
+   render() {
+
+      return (
+         <Cart {...this.props} setTotalPrice={this.setTotalPrice} toggleFalseRevealCart={this.toggleFalseRevealCart} />
+      )
+   }
+}
 
 const mapStateToProps = (state) => {
    return {
-      totalPrice: state.cart.totalPrice,
       isToggleCartReveal: state.cart.isToggleCartReveal,
       itemsSumCount: state.cart.itemsSumCount,
       items: state.cart.items,
       activeCurrency: state.currency.activeCurrency,
-      activeColor: state.pdp.activeColor,
-      activeSize: state.pdp.activeSize,
-      activeFirstOpt: state.pdp.activeFirstOpt,
-      activeSecondOpt: state.pdp.activeSecondOpt,
    }
 }
 const mapDispatchToProps = (dispatch) => {
    return {
-      setTotalPrice: (symbol, price) => dispatch(setTotalPrice(symbol, price)),
-      addItem: () => dispatch(addItem()),
-      substractItem: () => dispatch(substractItem()),
       toggleCartReveal: (isCartRevealed) => dispatch(toggleCartRevealAC(isCartRevealed)),
    }
 }
 
-const CartContainer = connect(mapStateToProps, mapDispatchToProps)(Cart)
-
-export default CartContainer
+export default connect(mapStateToProps, mapDispatchToProps)(CartContainer)
 
 
 

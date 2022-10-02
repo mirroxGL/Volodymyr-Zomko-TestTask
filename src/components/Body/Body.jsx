@@ -1,7 +1,7 @@
 import s from "./body.module.css"
 import classnames from 'classnames';
-import Item from "./Item/Item";
 import { PureComponent } from "react";
+import ItemContainer from "./Item/ItemContainer";
 
 class Body extends PureComponent {
    componentDidMount() {
@@ -13,31 +13,18 @@ class Body extends PureComponent {
       }
    }
 
-
    render() {
-      const { activeCurrency,
+      const {
          activeCategory,
-         setItemId,
-         items,
-         cartItems,
-         setItemToCart,
-         setSumCountItems,
-         addItem } = this.props
+         items, } = this.props
       return (
          <div className={s.bodyBlock}>
             <div className={classnames(s.bodyWrapper)}>
                <div className={s.title}><span>{activeCategory}</span></div>
                <div className={s.items}>
-                  {items.map((value, i) => <Item
-                     activeCurrency={activeCurrency}
-                     setItemId={setItemId}
+                  {items.map((value, i) => <ItemContainer
                      item={value}
-                     items={items}
-                     cartItems={cartItems}
-                     key={i}
-                     setItemToCart={setItemToCart}
-                     setSumCountItems={setSumCountItems}
-                     addItem={addItem} />)}
+                     key={i} />)}
                </div>
             </div>
          </div>

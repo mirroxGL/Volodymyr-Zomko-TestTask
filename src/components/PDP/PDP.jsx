@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import s from "./PDP.module.css"
-import Attributes from './Attribute/Attributes';
+import AttributesContainer from './Attributes/AttributesContainer';
 
 
 class PDP extends PureComponent {
@@ -26,53 +26,9 @@ class PDP extends PureComponent {
       this.props.clearItem()
    }
 
-   setPrices = (prices, activeCurrency) => {
-      for (let i = 0; i < prices.length; i++) {
-         if (prices[i].currency.symbol === activeCurrency.symbol) {
-            return prices[i].currency.symbol + " " + prices[i].amount
-         }
-      }
-   }
-
    setMainImage = (image) => {
       this.setState({ mainImage: image })
    }
-
-   isDuplicate = (item) => {
-      return item.id === this.props.item?.product.id &&
-         item.activeAttributes.activeColor === this.props.activeColor &&
-         item.activeAttributes.activeSize === this.props.activeSize &&
-         item.activeAttributes.activeFirstOpt === this.props.activeFirstOpt &&
-         item.activeAttributes.activeSecondOpt === this.props.activeSecondOpt
-   }
-
-   setItemToCart = (item) => {
-      if (this.props.cartItems.some(this.isDuplicate)) {
-         this.props.cartItems.forEach(i => {
-            if (this.isDuplicate(i))
-               (i.activeAttributes.itemCount += 1)
-         }
-         )
-      }
-      else {
-         !item?.inStock && this.props.setItemToCart({
-            ...item, activeAttributes: {
-               ...item.activeAttributes = {
-                  activeColor: this.props.activeColor,
-                  activeSize: this.props.activeSize,
-                  activeFirstOpt: this.props.activeFirstOpt,
-                  activeSecondOpt: this.props.activeSecondOpt,
-                  activeImage: { img: undefined, index: 0 },
-                  itemCount: 1,
-                  displayPrice: this.setPrices(this.props.item.product.prices, this.props.activeCurrency)
-               }
-            }
-         })
-      }
-      !item?.inStock && this.props.addItem()
-
-   }
-   /////////////////////////////RENDERS/////////////////////////////
 
    renderSmallImages = () => {
       return (
@@ -93,24 +49,15 @@ class PDP extends PureComponent {
          <div className={s.PDP__info}>
             <div className={s.info__title_firm}><span>{this.props.item?.product.brand}</span></div>
             <div className={s.info__title_type}><span>{this.props.item?.product.name}</span></div>
-            <Attributes
-               setActiveSize={this.props.setActiveSize}
-               setActiveColor={this.props.setActiveColor}
-               setActiveFirstOpt={this.props.setActiveFirstOpt}
-               setActiveSecondOpt={this.props.setActiveSecondOpt}
-               activeColor={this.props.activeColor}
-               activeSize={this.props.activeSize}
-               activeFirstOpt={this.props.activeFirstOpt}
-               activeSecondOpt={this.props.activeSecondOpt}
-               attributes={this.props.item?.product.attributes} />
+            <AttributesContainer />
             <div className={s.priceBlock}>
                <span>PRICE:</span>
                <br />
-               <span>{this.props.item?.product.prices ? this.setPrices(this.props.item.product.prices, this.props.activeCurrency) : ""}</span>
+               <span>{this.props.item?.product.prices ? this.props.setPrices(this.props.item.product.prices, this.props.activeCurrency) : ""}</span>
             </div>
-            <div onClick={() => this.setItemToCart(this.props.item?.product)} className={s.addToCart}>
+            <button onClick={() => this.props.setItemToCart(this.props.item?.product)} className={s.addToCart}>
                <div className={s.addToCartBtn}>ADD TO CART</div>
-            </div>
+            </button>
             <div dangerouslySetInnerHTML={{ __html: this.props.item?.product?.description }} className={s.description}>
             </div>
          </div>

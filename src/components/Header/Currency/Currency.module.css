@@ -14,7 +14,9 @@
    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
 }
 
-.currency div {
+.currencyItem {
+   background-color: transparent;
+   border: none;
    text-align: left;
    padding: 8px 0;
    width: 100%;
@@ -25,7 +27,7 @@
    line-height: 28.8px;
 }
 
-.currency div span {
+.currency button span {
    user-select: none;
    display: inline-block;
    margin-left: 20px;
