@@ -1,4 +1,6 @@
 import { PureComponent } from 'react';
+import { cartAttributesBuilder } from '../../../util/object-helpers';
+import s from ".././PDP.module.css"
 
 export default class Attribute extends PureComponent {
    componentDidMount() {
@@ -25,7 +27,7 @@ export default class Attribute extends PureComponent {
       return (
          <div>
             {attributes?.map((attr, i) => {
-               return this.props.PDPAttributesBuilder(attr, i)
+               return cartAttributesBuilder(attr, i, this.props.item, s)
             })}
          </div >
       )

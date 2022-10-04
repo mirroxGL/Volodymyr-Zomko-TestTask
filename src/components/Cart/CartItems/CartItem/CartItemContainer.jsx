@@ -7,7 +7,7 @@ class CartItemContainer extends PureComponent {
    constructor(props) {
       super(props)
       this.state = {
-         itemCount: 0
+         itemCount: 1
       }
    }
    incrItem = (item) => {
@@ -23,7 +23,7 @@ class CartItemContainer extends PureComponent {
    render() {
       return (
          this.props.item.activeAttributes.itemCount !== 0 &&
-         <CartItem {...this.props} decrItem={this.decrItem} incrItem={this.incrItem} setPrices={this.setPrices} />
+         <CartItem {...this.props} decrItem={this.decrItem} incrItem={this.incrItem} itemCount={this.state.itemCount} setPrices={this.setPrices} />
       )
    }
 }

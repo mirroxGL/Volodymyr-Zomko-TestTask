@@ -1,15 +1,22 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { addItem, substractItem } from '../../../../redux/cart-reducer'
 import { connect } from 'react-redux'
 import MainCartItem from './MainCartItem'
 
-class MainCartItemContainer extends PureComponent {
+class MainCartItemContainer extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         itemCount: 0,
+         itemCount: 1,
          currentImgIndex: 0,
-         currentImg: undefined
+         currentImg: undefined,
+         isCartRevealed: this.props.isCartRevealed
+      }
+   }
+
+   componentDidUpdate(prevProps) {
+      if (prevProps.item.activeAttributes.itemCount !== this.state.itemCount) {
+         this.setState({ itemCount: this.props.item.activeAttributes.itemCount })
       }
    }
 
@@ -22,7 +29,7 @@ class MainCartItemContainer extends PureComponent {
    }
    incrItemHandler = (item) => {
       item.activeAttributes.itemCount += 1
-      this.setState({ itemCount: this.state.itemCount - 1 })
+      this.setState({ itemCount: this.state.itemCount + 1 })
       this.props.addItem()
 
    }
@@ -58,6 +65,7 @@ class MainCartItemContainer extends PureComponent {
    render() {
       return (
          this.props.item.activeAttributes.itemCount !== 0 && <MainCartItem {...this.props}
+            itemCount={this.state.itemCount}
             currentImgIndex={this.state.currentImgIndex}
             currentImg={this.state.currentImg}
             setPrices={this.setPrices}
@@ -72,6 +80,7 @@ class MainCartItemContainer extends PureComponent {
 
 const mapStateToProps = (state) => {
    return {
+      isCartRevealed: state.cart.isToggleCartReveal,
       items: state.cart.items,
       activeCurrency: state.currency.activeCurrency,
       activeColor: state.pdp.activeColor,

@@ -26,7 +26,6 @@ class MainCartContainer extends PureComponent {
    }
 }
 
-
 const mapStateToProps = (state) => {
    return {
       taxes: state.cart.taxes,

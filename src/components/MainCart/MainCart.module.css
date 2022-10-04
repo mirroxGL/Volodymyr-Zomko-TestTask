@@ -67,25 +67,25 @@
    margin-bottom: 20px;
 }
 
-.mainCart__size span {
+.item__sizeBlock span {
    display: inline-block;
    font-size: 18px;
    font-family: "Roboto Condensed";
    margin-bottom: 7px;
 }
 
-.mainCart__sizeGrids {
+.size__gridsBlock {
    margin-bottom: 16px;
    display: flex;
    flex-direction: row;
 }
 
 
-.mainCart__sizeGrid:last-child {
+.sizeGrid:last-child {
    margin-right: 0px;
 }
 
-.mainCart__sizeGrid {
+.sizeGrid {
    cursor: pointer;
    user-select: none;
    text-align: center;
@@ -96,13 +96,13 @@
 
 }
 
-.sizeGridActive {
+.activeSizeGrid {
    background-color: black;
    color: white;
 }
 
 
-.mainCart__sizeGrid span {
+.sizeGrid span {
 
    display: inline-block;
    margin-top: 10px;
@@ -111,7 +111,7 @@
    font-weight: normal;
 }
 
-.mainCart__color span {
+.item__colorBlock span {
    display: inline-block;
    margin-bottom: 8px;
    font-size: 18px;
@@ -119,12 +119,12 @@
    font-family: "Roboto Condensed";
 }
 
-.mainCart__colorGrids {
+.chooseColorBlock {
    margin-bottom: 16px;
    display: flex;
 }
 
-.mainCart__colorGrid {
+.color {
    cursor: pointer;
    user-select: none;
    width: 32px;
@@ -133,7 +133,7 @@
    margin-right: 8px;
 }
 
-.colorGridActive {
+.activeColor {
    position: absolute;
    margin-top: -2px;
    margin-left: -2px;
