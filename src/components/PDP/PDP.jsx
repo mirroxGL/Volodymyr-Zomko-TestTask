@@ -17,8 +17,11 @@ class PDP extends PureComponent {
    }
 
    componentDidUpdate() {
-      if (this.state.isFirstImageReavealed && this.state.mainImage !== this.props.item?.product.gallery[0]) {
-         this.setState({ mainImage: this.props.item?.product.gallery[0], isFirstImageReavealed: false })
+      const { isFirstImageReavealed, mainImage } = this.state
+      const { item } = this.props
+
+      if (isFirstImageReavealed && mainImage !== item?.product.gallery[0]) {
+         this.setState({ mainImage: item?.product.gallery[0], isFirstImageReavealed: false })
       }
    }
 
@@ -31,9 +34,11 @@ class PDP extends PureComponent {
    }
 
    renderSmallImages = () => {
+      const { item } = this.props
+
       return (
          <div className={s.PDP__smallImgs}>
-            {this.props.item?.product.gallery.map((img, i) => {
+            {item?.product.gallery.map((img, i) => {
                return <div key={i} onClick={() => this.setMainImage(img)} className={s.PDP__smallImg}><img src={img} alt="" /></div>
             })}
          </div>
@@ -45,20 +50,25 @@ class PDP extends PureComponent {
       )
    }
    renderPDPInfo = () => {
+      const { item,
+         setPrices,
+         setItemToCart,
+         activeCurrency } = this.props
+
       return (
          <div className={s.PDP__info}>
-            <div className={s.info__title_firm}><span>{this.props.item?.product.brand}</span></div>
-            <div className={s.info__title_type}><span>{this.props.item?.product.name}</span></div>
+            <div className={s.info__title_firm}><span>{item?.product.brand}</span></div>
+            <div className={s.info__title_type}><span>{item?.product.name}</span></div>
             <AttributesContainer />
             <div className={s.priceBlock}>
                <span>PRICE:</span>
                <br />
-               <span>{this.props.item?.product.prices ? this.props.setPrices(this.props.item.product.prices, this.props.activeCurrency) : ""}</span>
+               <span>{item?.product.prices ? setPrices(item.product.prices, activeCurrency) : ""}</span>
             </div>
-            <button onClick={() => this.props.setItemToCart(this.props.item?.product)} className={s.addToCart}>
+            <button onClick={() => setItemToCart(item?.product)} className={s.addToCart}>
                <div className={s.addToCartBtn}>ADD TO CART</div>
             </button>
-            <div dangerouslySetInnerHTML={{ __html: this.props.item?.product?.description }} className={s.description}>
+            <div dangerouslySetInnerHTML={{ __html: item?.product?.description }} className={s.description}>
             </div>
          </div>
       )

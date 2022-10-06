@@ -7,18 +7,19 @@ import cart from '../.././assets/images/cart.svg'
 import s from "./header.module.css"
 import { NavLink } from 'react-router-dom';
 
-
 class Header extends PureComponent {
    componentDidMount() {
       this.props.getCategories()
    }
 
    renderCategories = () => {
+      const { handleCategoryClick, activeCategory, categories } = this.props
+
       return (
          <div className={s.categoriesBlock}>
             <div className={s.categories}>
-               {this.props.categories?.map((category, i) => {
-                  return <NavLink to={{ pathname: `/${category.name}` }} key={i} onClick={() => this.props.handleCategoryClick(category.name)} className={s.categories__item}><span className={this.props.activeCategory === category.name ? s.active : 0}>{category.name}</span></NavLink>
+               {categories?.map((category, i) => {
+                  return <NavLink to={{ pathname: `/${category.name}` }} key={i} onClick={() => handleCategoryClick(category.name)} className={s.categories__item}><span className={activeCategory === category.name ? s.active : 0}>{category.name}</span></NavLink>
                })}
             </div>
          </div>

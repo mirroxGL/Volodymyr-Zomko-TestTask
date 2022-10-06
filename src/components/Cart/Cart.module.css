@@ -106,8 +106,8 @@
 .sizeGrid {
    user-select: none;
    margin-right: 5px;
-   min-width: 16px;
-   min-height: 16px;
+   min-width: 24px;
+   min-height: 24px;
    cursor: pointer;
    font-size: 14px;
    line-height: 22.4px;

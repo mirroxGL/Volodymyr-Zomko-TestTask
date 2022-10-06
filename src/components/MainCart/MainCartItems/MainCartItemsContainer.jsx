@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { addItem, substractItem } from '../../../redux/cart-reducer'
-import { setActiveColor, setActiveFirstOpt, setActiveSecondOpt, setActiveSize } from '../../../redux/pdp/actions'
 import MainCartItems from './MainCartItems'
 
 class MainCartItemsContainer extends PureComponent {

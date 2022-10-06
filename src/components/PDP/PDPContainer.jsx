@@ -2,45 +2,62 @@ import { connect } from 'react-redux'
 import { setSumCountItems, setItemToCart, addItem } from '../../redux/cart-reducer';
 import { setPdpItemTC, clearItem } from '../../redux/pdp/actions';
 import PDP from './PDP';
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { setPrices } from '../../util/object-helpers';
 
-class PDPContainer extends Component {
+class PDPContainer extends PureComponent {
    isDuplicate = (item) => {
+      const { activeAttributes: { activeColor,
+         activeSize,
+         activeSecondOpt,
+         activeFirstOpt } } = item
+
       return item.id === this.props.item?.product.id &&
-         item.activeAttributes.activeColor === this.props.activeColor &&
-         item.activeAttributes.activeSize === this.props.activeSize &&
-         item.activeAttributes.activeFirstOpt === this.props.activeFirstOpt &&
-         item.activeAttributes.activeSecondOpt === this.props.activeSecondOpt
+         activeColor === this.props.activeColor &&
+         activeSize === this.props.activeSize &&
+         activeFirstOpt === this.props.activeFirstOpt &&
+         activeSecondOpt === this.props.activeSecondOpt
    }
 
    setItemToCart = (item) => {
-      if (this.props.cartItems.some(this.isDuplicate)) {
-         this.props.cartItems.forEach(i => {
+      const { cartItems,
+         setItemToCart,
+         activeColor,
+         activeSize,
+         activeFirstOpt,
+         activeSecondOpt,
+         activeCurrency,
+         item: { product: { prices } },
+         addItem } = this.props
+
+      if (cartItems.some(this.isDuplicate)) {
+         cartItems.forEach(i => {
             if (this.isDuplicate(i))
                (i.activeAttributes.itemCount += 1)
          }
          )
       }
       else {
-         item?.inStock && this.props.setItemToCart({
+         item?.inStock && setItemToCart({
             ...item, activeAttributes: {
                ...item.activeAttributes = {
-                  activeColor: this.props.activeColor,
-                  activeSize: this.props.activeSize,
-                  activeFirstOpt: this.props.activeFirstOpt,
-                  activeSecondOpt: this.props.activeSecondOpt,
+                  activeColor: activeColor,
+                  activeSize: activeSize,
+                  activeFirstOpt: activeFirstOpt,
+                  activeSecondOpt: activeSecondOpt,
                   itemCount: 1,
-                  displayPrice: setPrices(this.props.item.product.prices, this.props.activeCurrency)
+                  displayPrice: setPrices(prices, activeCurrency)
                }
             }
          })
       }
-      item?.inStock && this.props.addItem()
+      item?.inStock && addItem()
    }
+
    render() {
       return (
-         <PDP {...this.props} setPrices={setPrices} isDuplicate={this.isDuplicate} setItemToCart={this.setItemToCart} />
+         <PDP {...this.props
+         } setPrices={setPrices} isDuplicate={this.isDuplicate} setItemToCart={this.setItemToCart} />
       )
    }
 }

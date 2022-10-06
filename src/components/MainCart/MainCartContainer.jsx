@@ -2,22 +2,20 @@ import { connect } from 'react-redux'
 import { setSumCountItems, setTaxes, setTotalPrice } from '../../redux/cart-reducer';
 import MainCart from './MainCart.jsx';
 import React, { PureComponent } from 'react'
+import { setTotalPriceLogic } from '../../util/object-helpers';
 
 class MainCartContainer extends PureComponent {
    setFinalDigits = () => {
-      this.setTotalPrice(this.props.items, this.props.activeCurrency)
-      this.props.setTaxes(this.props.activeCurrency?.symbol, ((this.props.totalPrice?.price) * 0.21).toFixed(2))
+      const { items,
+         activeCurrency,
+         totalPrice,
+         setTaxes } = this.props
+      this.setTotalPrice(items, activeCurrency)
+      setTaxes(activeCurrency?.symbol, ((totalPrice?.price) * 0.21).toFixed(2))
    }
 
    setTotalPrice = (items, activeCurrency) => {
-      let sum = 0
-      let num = 0
-      for (let i = 0; i < items.length; i++) {
-         let price = items[i].prices.find(({ currency }) => currency.label === activeCurrency.label)
-         num = price.amount * items[i].activeAttributes.itemCount
-         sum += num
-      }
-      this.props.setTotalPrice(activeCurrency.symbol, sum.toFixed(2))
+      this.props.setTotalPrice(activeCurrency.symbol, setTotalPriceLogic(items, activeCurrency).toFixed(2))
    }
    render() {
       return (

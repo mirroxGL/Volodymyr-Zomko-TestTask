@@ -1,21 +1,27 @@
 import { PureComponent } from 'react';
-import { cartAttributesBuilder } from '../../../util/object-helpers';
-import s from ".././PDP.module.css"
 
 export default class Attribute extends PureComponent {
    componentDidMount() {
-      this.props.attributes?.forEach((attr, i) => {
+      const { attributes,
+         setActiveColor,
+         setActiveSize,
+         setActiveFirstOpt,
+         setActiveSecondOpt } = this.props
+
+      attributes?.forEach((attr, i) => {
+         let value = attr.items[0].value
+
          if (attr.type === "swatch") {
-            this.props.setActiveColor(attr.items[0].value);
+            setActiveColor(value);
          }
          else if (attr.type === "text" & attr.id === "Capacity" || attr.id === "Size") {
-            this.props.setActiveSize(attr.items[0].value)
+            setActiveSize(value)
          }
          else if (attr.type === "text" & attr.id === "With USB 3 ports") {
-            this.props.setActiveFirstOpt(attr.items[0].value)
+            setActiveFirstOpt(value)
          }
          else {
-            this.props.setActiveSecondOpt(attr.items[0].value)
+            setActiveSecondOpt(value)
          }
       })
    }
@@ -27,7 +33,7 @@ export default class Attribute extends PureComponent {
       return (
          <div>
             {attributes?.map((attr, i) => {
-               return cartAttributesBuilder(attr, i, this.props.item, s)
+               return this.props.PDPAttributesBuilder(attr, i)
             })}
          </div >
       )

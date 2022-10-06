@@ -1,29 +1,38 @@
-import React, { Component } from 'react'
-import cartAttributesBuilder from './CartAttributesBuilder'
+import React, { PureComponent } from 'react'
+import { cartAttributesBuilder, setPrices } from '../../../../util/object-helpers.jsx'
 import s from "../../Cart.module.css"
 
-export default class CartItem extends Component {
+export default class CartItem extends PureComponent {
    renderLeftSide = (item) => {
+      const { attributes,
+         prices,
+         brand,
+         name
+      } = item
+
       return (
          <div className={s.item__bodyLeft}>
             <div className={s.item__title}>
-               <span><span>{item.brand} </span>{item.name}</span>
+               <span><span>{brand}</span>{name}</span>
             </div>
             <div className={s.item__price}>
-               <span>{item.activeAttributes.displayPrice}</span>
+               <span>{setPrices(prices, this.props.activeCurrency)}</span>
             </div>
-            {item.attributes.map((attr, i) => {
-               return cartAttributesBuilder(attr, i, item)
+            {attributes.map((attr, i) => {
+               return cartAttributesBuilder(attr, i, item, s)
             })}
          </div>
       )
    }
    renderMidSide = (item) => {
+      const { incrItem, decrItem } = this.props
+      const { activeAttributes: { itemCount } } = item
+
       return (
          <div className={s.item__bodyMid}>
-            <button onClick={() => this.props.incrItem(item)} className={s.item__add}><div>+</div></button>
-            <span>{item.activeAttributes.itemCount}</span>
-            <button onClick={() => item.activeAttributes.itemCount !== 0 && this.props.decrItem(item)} className={s.item__delete}><div>-</div></button>
+            <button onClick={() => incrItem(item)} className={s.item__add}><div>+</div></button>
+            <span>{itemCount}</span>
+            <button onClick={() => itemCount !== 0 && decrItem(item)} className={s.item__delete}><div>-</div></button>
          </div>
       )
    }

@@ -4,18 +4,21 @@ import { connect } from 'react-redux'
 import { toggleCurrencyRevealAC } from "../../redux/currency-reducer";
 import { getCategoriesTC, setActiveCategory } from "../../redux/header-reducer";
 import { setActiveBodyCategory } from "../../redux/body-reducer";
+import React, { PureComponent } from 'react'
 
-import React, { Component } from 'react'
-
-class HeaderContainer extends Component {
+class HeaderContainer extends PureComponent {
    setActiveCategories = (category) => {
-      this.props.setActiveBodyCategory(category)
-      this.props.setActiveCategory(category)
+      const { setActiveBodyCategory, setActiveCategory } = this.props
+
+      setActiveBodyCategory(category)
+      setActiveCategory(category)
    }
 
    handleLogoClick = () => {
-      this.props.toggleCartReveal(false)
-      this.props.toggleCurrencyReveal(false)
+      const { toggleCartReveal, toggleCurrencyReveal } = this.props
+
+      toggleCartReveal(false)
+      toggleCurrencyReveal(false)
       if (window.location.pathname.split("/")[1] !== "") {
          window.history.back()
          if (window.location.pathname === "/all" || window.location.pathname === "/clothes" || window.location.pathname === "/tech") {
@@ -25,17 +28,20 @@ class HeaderContainer extends Component {
    }
 
    handleCartMouseClick = () => {
-      this.props.toggleCurrencyReveal(false)
-      this.props.toggleCartReveal(true)
-      if (this.props.isToggleCartReveal) {
-         this.props.toggleCartReveal(false)
+      const { toggleCurrencyReveal, toggleCartReveal, isToggleCartReveal } = this.props
+
+      toggleCurrencyReveal(false)
+      toggleCartReveal(true)
+      if (isToggleCartReveal) {
+         toggleCartReveal(false)
       }
    }
    handleCurrencyMouseClick = () => {
-      this.props.toggleCartReveal(false)
-      this.props.toggleCurrencyReveal(true)
-      if (this.props.isToggleCurrencyReveal) {
-         this.props.toggleCurrencyReveal(false)
+      const { toggleCurrencyReveal, toggleCartReveal, isToggleCurrencyReveal } = this.props
+      toggleCartReveal(false)
+      toggleCurrencyReveal(true)
+      if (isToggleCurrencyReveal) {
+         toggleCurrencyReveal(false)
       }
    }
 
@@ -54,7 +60,6 @@ class HeaderContainer extends Component {
       )
    }
 }
-
 
 const mapStateToProps = (state) => {
    return {

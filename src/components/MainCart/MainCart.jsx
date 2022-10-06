@@ -7,27 +7,32 @@ class MainCart extends PureComponent {
    componentDidMount = () => {
       this.props.setFinalDigits()
    }
-
    componentDidUpdate = (prevProps) => {
-      if (prevProps.activeCurrency !== this.props.activeCurrency || prevProps.totalPrice?.price !== this.props.totalPrice?.price || prevProps.itemsSumCount !== this.props.itemsSumCount) {
-         this.props.setFinalDigits()
+      const { activeCurrency, totalPrice, itemsSumCount, setFinalDigits } = this.props
+
+      if (prevProps.activeCurrency !== activeCurrency || prevProps.totalPrice?.price !== totalPrice?.price || prevProps.itemsSumCount !== itemsSumCount) {
+         setFinalDigits()
       }
    }
 
    renderCartItems = () => {
+      const { activeCurrency, items } = this.props
+
       return (
          <MainCartItems
-            activeCurrency={this.props.activeCurrency}
-            items={this.props.items}
+            activeCurrency={activeCurrency}
+            items={items}
          />
       )
    }
 
    renderTaxes = () => {
+      const { taxes } = this.props
+
       return (
          <div className={s.taxes}>
             <span className={s.label}>Tax 21%: </span>
-            <span className={s.number}>{this.props.taxes?.symbol} {this.props.taxes?.amount}</span>
+            <span className={s.number}>{taxes?.symbol} {taxes?.amount}</span>
          </div>
       )
    }
@@ -40,10 +45,11 @@ class MainCart extends PureComponent {
       )
    }
    renderTotal = () => {
+      const { totalPrice } = this.props
       return (
          <div className={s.total}>
             <span className={s.label}>Total: </span>
-            <span className={s.number}>{this.props.totalPrice?.symbol} {this.props.totalPrice?.price}</span>
+            <span className={s.number}>{totalPrice?.symbol} {totalPrice?.price}</span>
          </div>
       )
    }

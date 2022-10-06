@@ -1,11 +1,19 @@
 import classnames from "classnames"
 
 export const setPrices = (prices, activeCurrency) => {
-   for (let i = 0; i < prices.length; i++) {
-      if (prices[i].currency.symbol === activeCurrency.symbol) {
-         return prices[i].currency.symbol + " " + prices[i].amount
-      }
+   let amount = prices.find(({ currency }) => currency.symbol === activeCurrency.symbol).amount
+   let symbol = prices.find(({ currency }) => currency.symbol === activeCurrency.symbol).currency.symbol
+   return symbol + " " + amount
+}
+
+export const setTotalPriceLogic = (items, activeCurrency) => {
+   if (items.length !== 0) {
+      return items.reduce((total, item) => {
+         const { prices, activeAttributes: { itemCount } } = item
+         return total + (prices.find(({ currency }) => currency.label === activeCurrency.label).amount * itemCount)
+      }, 0)
    }
+   else return 0
 }
 
 const sizeClasses = (activeAttr, size, s) => {
@@ -30,7 +38,7 @@ export const cartAttributesBuilder = (attr, i, item, s) => {
          <span>{attr.name}:</span>
          <div className={s.size__gridsBlock}>
             {attr.items.map((size, i) => {
-               return <div key={i} className={sizeClasses(item.activeAttributes.activeSize, size.value, s)}><span>{size.value}</span></div>
+               return <div key={i} className={sizeClasses(item.activeAttributes?.activeSize, size.value, s)}><span>{size.value}</span></div>
             })}
          </div>
       </div>
@@ -40,7 +48,7 @@ export const cartAttributesBuilder = (attr, i, item, s) => {
          <span>{attr.name}:</span>
          <div className={s.size__gridsBlock}>
             {attr.items.map((size, i) => {
-               return <div key={i} className={sizeClasses(item.activeAttributes.activeFirstOpt, size.value, s)}><span>{size.value}</span></div>
+               return <div key={i} className={sizeClasses(item.activeAttributes?.activeFirstOpt, size.value, s)}><span>{size.value}</span></div>
             })}
          </div>
       </div>
@@ -50,7 +58,7 @@ export const cartAttributesBuilder = (attr, i, item, s) => {
          <span>{attr.name}:</span>
          <div className={s.size__gridsBlock}>
             {attr.items.map((size, i) => {
-               return <div key={i} className={sizeClasses(item.activeAttributes.activeSecondOpt, size.value, s)}><span>{size.value}</span></div>
+               return <div key={i} className={sizeClasses(item.activeAttributes?.activeSecondOpt, size.value, s)}><span>{size.value}</span></div>
             })}
          </div>
       </div>

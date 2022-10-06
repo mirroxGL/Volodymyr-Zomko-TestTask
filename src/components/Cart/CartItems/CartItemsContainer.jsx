@@ -1,17 +1,11 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
+import { setPrices } from '../../../util/object-helpers';
 import CartItems from "./CartItems";
 
-export default class CartItemsContainer extends Component {
-   setPrices = (prices, activeCurrency) => {
-      for (let i = 0; i < prices.length; i++) {
-         if (prices[i].currency.symbol === activeCurrency.symbol) {
-            return prices[i].currency.symbol + " " + prices[i].amount
-         }
-      }
-   }
+export default class CartItemsContainer extends PureComponent {
    render() {
       return (
-         <CartItems {...this.props} setPrices={this.setPrices} />
+         <CartItems {...this.props} setPrices={setPrices} />
       )
    }
 }

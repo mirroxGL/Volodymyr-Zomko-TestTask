@@ -8,8 +8,12 @@ class Body extends PureComponent {
       this.props.setBodyItems(this.props.activeBodyCategory)
    }
    componentDidUpdate(prevProps) {
-      if (prevProps.activeBodyCategory !== this.props.activeBodyCategory) {
-         this.props.setBodyItems(this.props.activeBodyCategory)
+      const {
+         activeBodyCategory,
+         setBodyItems } = this.props
+
+      if (prevProps.activeBodyCategory !== activeBodyCategory) {
+         setBodyItems(activeBodyCategory)
       }
    }
 
