@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react'
 import s from "../.././MainCart.module.css"
 import prev from "../../../../assets/images/vectorPrev.svg"
 import next from "../../../../assets/images/vectorNext.svg"
-import { cartAttributesBuilder } from '../../../../util/object-helpers'
+import CartAttributesBuilder from '../../../../util/AttributesBuilders/CartAttributesBuilder'
+
 
 export default class MainCartItem extends PureComponent {
    renderLeftSide = (item) => {
@@ -17,20 +18,22 @@ export default class MainCartItem extends PureComponent {
             </div>
             <span className={s.item__price}>{setPrices(prices, activeCurrency)}</span>
             {attributes.map((attr, i) => {
-               return cartAttributesBuilder(attr, i, item, s)
+               return <CartAttributesBuilder key={i} attr={attr} i={i} item={item} s={s} />
             })}
          </div>
       )
    }
 
    renderRightSide = (item) => {
-      const { incrItemHandler,
+      const {
+         incrItemHandler,
          decrItem,
          currentImg,
          currentImgIndex,
          prevImage,
          nextImage } = this.props
-      const { gallery,
+      const {
+         gallery,
          activeAttributes: { itemCount } } = item
 
       return (

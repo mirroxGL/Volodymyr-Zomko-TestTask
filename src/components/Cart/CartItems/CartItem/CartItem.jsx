@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
-import { cartAttributesBuilder, setPrices } from '../../../../util/object-helpers.jsx'
+import { setPrices } from '../../../../util/object-helpers.jsx'
+import CartAttributesBuilder from '../../../../util/AttributesBuilders/CartAttributesBuilder'
 import s from "../../Cart.module.css"
 
 export default class CartItem extends PureComponent {
@@ -19,7 +20,7 @@ export default class CartItem extends PureComponent {
                <span>{setPrices(prices, this.props.activeCurrency)}</span>
             </div>
             {attributes.map((attr, i) => {
-               return cartAttributesBuilder(attr, i, item, s)
+               return <CartAttributesBuilder key={i} attr={attr} i={i} item={item} s={s} />
             })}
          </div>
       )
