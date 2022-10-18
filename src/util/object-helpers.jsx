@@ -1,5 +1,3 @@
-import classnames from "classnames"
-
 
 export const setPrices = (prices, activeCurrency) => {
    const price = prices.find(({ currency }) => currency.symbol === activeCurrency.symbol)
@@ -16,5 +14,22 @@ export const setTotalPriceLogic = (items, activeCurrency) => {
       }, 0)
    }
    else return 0
+}
+
+export function decrItem(item) {
+   const { substractItem } = this.props
+   const { itemCount } = this.state
+
+   item.activeAttributes.itemCount -= 1
+   this.setState({ itemCount: itemCount - 1 })
+   substractItem()
+}
+export function incrItem(item) {
+   const { addItem } = this.props
+   const { itemCount } = this.state
+
+   item.activeAttributes.itemCount += 1
+   this.setState({ itemCount: itemCount + 1 })
+   addItem()
 }
 

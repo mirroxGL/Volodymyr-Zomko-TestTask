@@ -16,13 +16,14 @@ class HeaderContainer extends PureComponent {
 
    handleLogoClick = () => {
       const { toggleCartReveal, toggleCurrencyReveal } = this.props
+      const { pathname } = window.location
 
       toggleCartReveal(false)
       toggleCurrencyReveal(false)
-      if (window.location.pathname.split("/")[1] !== "") {
+      if (pathname.split("/")[1] !== "") {
          window.history.back()
-         if (window.location.pathname === "/all" || window.location.pathname === "/clothes" || window.location.pathname === "/tech") {
-            this.setActiveCategories(window.location.pathname.split("/")[1])
+         if (pathname === "/all" || pathname === "/clothes" || pathname === "/tech") {
+            this.setActiveCategories(pathname.split("/")[1])
          }
       }
    }

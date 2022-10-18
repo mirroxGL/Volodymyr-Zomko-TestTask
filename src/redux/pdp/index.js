@@ -59,8 +59,6 @@ const pdpReducer = (state = initialState, action) => {
             ...state,
             activeSecondOpt: action.payload
          }
-
-
       default:
          return state
    }

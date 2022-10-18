@@ -5,7 +5,10 @@ import ItemContainer from "./Item/ItemContainer";
 
 class Body extends PureComponent {
    componentDidMount() {
-      this.props.setBodyItems(this.props.activeBodyCategory)
+      const { setBodyItems,
+         activeBodyCategory } = this.props
+
+      setBodyItems(activeBodyCategory)
    }
    componentDidUpdate(prevProps) {
       const {

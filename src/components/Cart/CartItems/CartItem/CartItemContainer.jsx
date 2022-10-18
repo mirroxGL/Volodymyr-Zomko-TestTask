@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react'
 import { addItem, substractItem } from '../../../../redux/cart-reducer'
 import { connect } from 'react-redux'
 import CartItem from './CartItem'
+import { decrItem, incrItem } from '../../../../util/object-helpers'
+
 class CartItemContainer extends PureComponent {
    constructor(props) {
       super(props)
@@ -9,24 +11,15 @@ class CartItemContainer extends PureComponent {
          itemCount: 1
       }
    }
-   decrItem = (item) => {
-      item.activeAttributes.itemCount -= 1
-      this.setState({ itemCount: this.state.itemCount - 1 })
-      this.props.substractItem()
-   }
-   incrItem = (item) => {
-      item.activeAttributes.itemCount += 1
-      this.setState({ itemCount: this.state.itemCount + 1 })
-      this.props.addItem()
-
-   }
 
    render() {
+      const { itemCount } = this.props.item.activeAttributes
+
       return (
-         this.props.item.activeAttributes.itemCount !== 0 &&
+         itemCount !== 0 &&
          <CartItem {...this.props}
-            decrItem={this.decrItem}
-            incrItem={this.incrItem}
+            decrItem={decrItem.bind(this)}
+            incrItem={incrItem.bind(this)}
             itemCount={this.state.itemCount}
             setPrices={this.setPrices} />
       )

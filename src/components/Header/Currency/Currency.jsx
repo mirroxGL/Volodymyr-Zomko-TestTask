@@ -4,7 +4,9 @@ import React, { PureComponent } from 'react'
 
 export default class Currency extends PureComponent {
    componentDidMount = () => {
-      this.props.getCurrencies()
+      const { getCurrencies } = this.props
+
+      getCurrencies()
    }
 
    render() {

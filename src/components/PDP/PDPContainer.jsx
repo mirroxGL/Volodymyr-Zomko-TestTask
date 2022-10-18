@@ -11,12 +11,13 @@ class PDPContainer extends PureComponent {
          activeSize,
          activeSecondOpt,
          activeFirstOpt } } = item
+      const props = this.props
 
-      return item.id === this.props.item?.product.id &&
-         activeColor === this.props.activeColor &&
-         activeSize === this.props.activeSize &&
-         activeFirstOpt === this.props.activeFirstOpt &&
-         activeSecondOpt === this.props.activeSecondOpt
+      return item.id === props.item?.product.id &&
+         activeColor === props.activeColor &&
+         activeSize === props.activeSize &&
+         activeFirstOpt === props.activeFirstOpt &&
+         activeSecondOpt === props.activeSecondOpt
    }
 
    setItemToCart = (item) => {

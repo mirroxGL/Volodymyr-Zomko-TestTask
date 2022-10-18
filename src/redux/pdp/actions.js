@@ -42,7 +42,6 @@ export const setActiveSize = (size) => ({
    payload: size
 })
 
-
 export const setPdpItemTC = (itemId) => async (dispatch) => {
    dispatch(setPending(true))
    const data = await pdpAPI.getPdpItem(itemId)

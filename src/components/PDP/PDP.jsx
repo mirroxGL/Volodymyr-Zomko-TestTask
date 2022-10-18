@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import s from "./PDP.module.css"
 import AttributesContainer from './Attributes/AttributesContainer';
 
-
 class PDP extends PureComponent {
    constructor(props) {
       super(props)
@@ -12,21 +11,24 @@ class PDP extends PureComponent {
       }
    }
    async componentDidMount() {
+      const { setPdpItem } = this.props
       let id = window.location.href.split("http://localhost:3000/pdp/")[1]
-      this.props.setPdpItem(id)
+      setPdpItem(id)
    }
 
    componentDidUpdate() {
       const { isFirstImageReavealed, mainImage } = this.state
       const { item } = this.props
+      const firstImage = item?.product.gallery[0]
 
-      if (isFirstImageReavealed && mainImage !== item?.product.gallery[0]) {
-         this.setState({ mainImage: item?.product.gallery[0], isFirstImageReavealed: false })
+      if (isFirstImageReavealed && mainImage !== firstImage) {
+         this.setState({ mainImage: firstImage, isFirstImageReavealed: false })
       }
    }
 
    componentWillUnmount() {
-      this.props.clearItem()
+      const { clearItem } = this.props
+      clearItem()
    }
 
    setMainImage = (image) => {
@@ -35,18 +37,20 @@ class PDP extends PureComponent {
 
    renderSmallImages = () => {
       const { item } = this.props
+      const gallery = item?.product.gallery
 
       return (
-         <div className={s.PDP__smallImgs}>
-            {item?.product.gallery.map((img, i) => {
+         item ? <div className={s.PDP__smallImgs}>
+            {gallery.map((img, i) => {
                return <div key={i} onClick={() => this.setMainImage(img)} className={s.PDP__smallImg}><img src={img} alt="" /></div>
             })}
-         </div>
+         </div> : <h1>Images are loading...</h1>
       )
    }
    renderMainImage = () => {
+      const { mainImage } = this.state
       return (
-         <div className={s.PDP__mainImg}><img src={this.state.mainImage} alt="" /></div>
+         <div className={s.PDP__mainImg}><img src={mainImage} alt="" /></div>
       )
    }
    renderPDPInfo = () => {
@@ -54,23 +58,24 @@ class PDP extends PureComponent {
          setPrices,
          setItemToCart,
          activeCurrency } = this.props
+      const product = item?.product
 
       return (
-         <div className={s.PDP__info}>
-            <div className={s.info__title_firm}><span>{item?.product.brand}</span></div>
-            <div className={s.info__title_type}><span>{item?.product.name}</span></div>
+         item ? <div className={s.PDP__info}>
+            <div className={s.info__title_firm}><span>{product.brand}</span></div>
+            <div className={s.info__title_type}><span>{product.name}</span></div>
             <AttributesContainer />
             <div className={s.priceBlock}>
                <span>PRICE:</span>
                <br />
-               <span>{item?.product.prices ? setPrices(item.product.prices, activeCurrency) : ""}</span>
+               <span>{product.prices ? setPrices(product.prices, activeCurrency) : ""}</span>
             </div>
-            <button onClick={() => setItemToCart(item?.product)} className={s.addToCart}>
+            <button onClick={() => setItemToCart(product)} className={s.addToCart}>
                <div className={s.addToCartBtn}>ADD TO CART</div>
             </button>
-            <div dangerouslySetInnerHTML={{ __html: item?.product?.description }} className={s.description}>
+            <div dangerouslySetInnerHTML={{ __html: product.description }} className={s.description}>
             </div>
-         </div>
+         </div> : <h1>Attributes are loading...</h1>
       )
    }
 

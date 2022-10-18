@@ -9,7 +9,9 @@ import { NavLink } from 'react-router-dom';
 
 class Header extends PureComponent {
    componentDidMount() {
-      this.props.getCategories()
+      const { getCategories } = this.props
+
+      getCategories()
    }
 
    renderCategories = () => {
@@ -27,9 +29,11 @@ class Header extends PureComponent {
    }
 
    renderLogo = () => {
+      const { handleLogoClick } = this.props
+
       return (
          <div>
-            <button onClick={() => this.props.handleLogoClick()} className={s.logoBlock}>
+            <button onClick={() => handleLogoClick()} className={s.logoBlock}>
                <img src={logo} alt="logo" />
             </button>
          </div>
@@ -37,13 +41,17 @@ class Header extends PureComponent {
    }
 
    renderCartAndCurrency = () => {
+      const { handleCurrencyMouseClick,
+         handleCartMouseClick,
+         itemsSumCount,
+         isToggleCurrencyReveal } = this.props
       return (
          <div className={s.cartNcurrency}>
-            <button onClick={() => this.props.handleCurrencyMouseClick()} className={s.currencyBlock}>
-               <div className={s.currency}>$<img className={s.vector} src={this.props.isToggleCurrencyReveal ? vectorUp : vectorDown} alt="" /> </div>
+            <button onClick={() => handleCurrencyMouseClick()} className={s.currencyBlock}>
+               <div className={s.currency}>$<img className={s.vector} src={isToggleCurrencyReveal ? vectorUp : vectorDown} alt="" /> </div>
             </button>
-            <button onClick={() => this.props.handleCartMouseClick()} className={s.cart}>
-               <div style={{ display: !this.props.itemsSumCount && "none" }} className={s.itemsCount}><span>{this.props.itemsSumCount}</span></div>
+            <button onClick={() => handleCartMouseClick()} className={s.cart}>
+               <div style={{ display: !itemsSumCount && "none" }} className={s.itemsCount}><span>{itemsSumCount}</span></div>
                <div><img src={cart} alt="" /></div>
             </button>
          </div>

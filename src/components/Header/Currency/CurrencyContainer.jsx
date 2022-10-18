@@ -5,7 +5,9 @@ import React, { PureComponent } from 'react'
 
 class CurrencyContainer extends PureComponent {
    clickHandler = (label, symbol) => {
-      this.props.setActiveCurrency(label, symbol)
+      const { setActiveCurrency } = this.props
+
+      setActiveCurrency(label, symbol)
    }
    render() {
       return (

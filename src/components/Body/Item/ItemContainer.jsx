@@ -41,14 +41,12 @@ class ItemContainer extends PureComponent {
    }
 }
 
-
 const mapStateToProps = (state) => {
    return {
       items: state.body.items,
       cartItems: state.cart.items,
       activeCurrency: state.currency.activeCurrency,
    }
-
 }
 const mapDispatchToProps = (dispatch) => {
    return {

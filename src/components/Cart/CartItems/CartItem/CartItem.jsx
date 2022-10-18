@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { setPrices } from '../../../../util/object-helpers.jsx'
-import CartAttributesBuilder from '../../../../util/AttributesBuilders/CartAttributesBuilder'
+import CartAttributesBuilder from '../../../../util/AttributesBuilders/CartAttributesBuilder/CartAttributesBuilder'
 import s from "../../Cart.module.css"
 
 export default class CartItem extends PureComponent {
@@ -38,10 +38,12 @@ export default class CartItem extends PureComponent {
       )
    }
    renderRightSide = (item) => {
+      const mainImg = item.gallery[0]
+
       return (
          <div className={s.item__bodyRight}>
             <div className={s.item__img}>
-               <img alt="" src={item.gallery[0]} />
+               <img alt="" src={mainImg} />
             </div>
          </div>
       )

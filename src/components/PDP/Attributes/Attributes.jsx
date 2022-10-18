@@ -1,4 +1,5 @@
 import { PureComponent } from 'react';
+import PDPAttributesBuilderContainer from '../../../util/AttributesBuilders/PDPAttributesBuilder/PDPAttributesBuilderContainer';
 
 export default class Attribute extends PureComponent {
    componentDidMount() {
@@ -33,7 +34,7 @@ export default class Attribute extends PureComponent {
       return (
          <div>
             {attributes?.map((attr, i) => {
-               return this.props.PDPAttributesBuilder(attr, i)
+               return <PDPAttributesBuilderContainer key={i} attr={attr} i={i} />
             })}
          </div >
       )

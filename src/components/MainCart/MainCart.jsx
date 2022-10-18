@@ -5,18 +5,27 @@ import MainCartItems from './MainCartItems/MainCartItems';
 
 class MainCart extends PureComponent {
    componentDidMount = () => {
-      this.props.setFinalDigits()
+      const { setFinalDigits } = this.props
+
+      setFinalDigits()
    }
    componentDidUpdate = (prevProps) => {
-      const { activeCurrency, totalPrice, itemsSumCount, setFinalDigits } = this.props
+      const { activeCurrency,
+         totalPrice: { price },
+         itemsSumCount,
+         setFinalDigits } = this.props
+      const prevActiveCurrency = prevProps.activeCurrency
+      const prevTotalPrice = prevProps.totalPrice?.price
+      const prevItemsCount = prevProps.itemsSumCount
 
-      if (prevProps.activeCurrency !== activeCurrency || prevProps.totalPrice?.price !== totalPrice?.price || prevProps.itemsSumCount !== itemsSumCount) {
+      if (prevActiveCurrency !== activeCurrency || prevTotalPrice !== price || prevItemsCount !== itemsSumCount) {
          setFinalDigits()
       }
    }
 
    renderCartItems = () => {
-      const { activeCurrency, items } = this.props
+      const { activeCurrency,
+         items } = this.props
 
       return (
          <MainCartItems
@@ -37,15 +46,18 @@ class MainCart extends PureComponent {
       )
    }
    renderQuantity = () => {
+      const { itemsSumCount } = this.props
+
       return (
          <div className={s.quantity}>
             <span className={s.label}>Quantity: </span>
-            <span className={s.number}>{this.props.itemsSumCount}</span>
+            <span className={s.number}>{itemsSumCount}</span>
          </div>
       )
    }
    renderTotal = () => {
       const { totalPrice } = this.props
+
       return (
          <div className={s.total}>
             <span className={s.label}>Total: </span>

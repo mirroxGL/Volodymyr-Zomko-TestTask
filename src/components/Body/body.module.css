@@ -58,6 +58,7 @@
 
 
 .item:hover {
+   z-index: 10;
    transition: all 0.3s ease-in-out;
    box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.19);
 

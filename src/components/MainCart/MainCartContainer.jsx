@@ -15,7 +15,8 @@ class MainCartContainer extends PureComponent {
    }
 
    setTotalPrice = (items, activeCurrency) => {
-      this.props.setTotalPrice(activeCurrency.symbol, setTotalPriceLogic(items, activeCurrency).toFixed(2))
+      const { setTotalPrice } = this.props
+      setTotalPrice(activeCurrency.symbol, setTotalPriceLogic(items, activeCurrency).toFixed(2))
    }
    render() {
       return (

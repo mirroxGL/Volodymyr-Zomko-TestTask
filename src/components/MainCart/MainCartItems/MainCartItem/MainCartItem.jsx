@@ -2,8 +2,7 @@ import React, { PureComponent } from 'react'
 import s from "../.././MainCart.module.css"
 import prev from "../../../../assets/images/vectorPrev.svg"
 import next from "../../../../assets/images/vectorNext.svg"
-import CartAttributesBuilder from '../../../../util/AttributesBuilders/CartAttributesBuilder'
-
+import CartAttributesBuilder from '../../../../util/AttributesBuilders/CartAttributesBuilder/CartAttributesBuilder'
 
 export default class MainCartItem extends PureComponent {
    renderLeftSide = (item) => {

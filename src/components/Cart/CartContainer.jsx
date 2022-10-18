@@ -6,10 +6,14 @@ import { setTotalPriceLogic } from "../../util/object-helpers";
 
 class CartContainer extends PureComponent {
    toggleFalseRevealCart = () => {
-      this.props.toggleCartReveal(false)
+      const { toggleCartReveal } = this.props
+
+      toggleCartReveal(false)
    }
    setTotalPrice = (items = this.props.items, activeCurrency = this.props.activeCurrency) => {
-      this.props.setTotalPrice(activeCurrency.symbol, setTotalPriceLogic(items, activeCurrency).toFixed(2))
+      const { setTotalPrice } = this.props
+
+      setTotalPrice(activeCurrency.symbol, setTotalPriceLogic(items, activeCurrency).toFixed(2))
    }
    render() {
 

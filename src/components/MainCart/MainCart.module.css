@@ -86,7 +86,6 @@
 }
 
 .sizeGrid {
-   cursor: pointer;
    user-select: none;
    text-align: center;
    height: 45px;
@@ -125,7 +124,6 @@
 }
 
 .color {
-   cursor: pointer;
    user-select: none;
    width: 32px;
    height: 32px;

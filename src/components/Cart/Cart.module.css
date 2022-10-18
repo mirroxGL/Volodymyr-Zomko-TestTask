@@ -108,7 +108,6 @@
    margin-right: 5px;
    min-width: 24px;
    min-height: 24px;
-   cursor: pointer;
    font-size: 14px;
    line-height: 22.4px;
    font-family: 'Source Sans Pro', sans-serif;
@@ -147,9 +146,7 @@
 
 .color {
    user-select: none;
-   cursor: pointer;
    margin-right: 8px;
-
    height: 16px;
    width: 16px;
    background-color: black;
