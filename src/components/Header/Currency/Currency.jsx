@@ -17,9 +17,10 @@ export default class Currency extends PureComponent {
          clickHandler
       } = this.props
       return (
-         isToggleCurrencyReveal ? < div className={s.currency} >
+         isToggleCurrencyReveal ? <div className={s.currency__container}>< div className={s.currency} >
             {currencies?.map((value, i) => <button key={i} onClick={() => clickHandler(value.label, value.symbol)} className={classnames(s.currencyItem, label === value.label && s.activeCurrency)}><span>{value.symbol} {value.label}</span></button>)}
-         </div > : ""
+         </div ></div> : ""
+
       )
    }
 }

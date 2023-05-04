@@ -7,6 +7,7 @@ import BodyContainer from './components/Body/BodyContainer';
 import CurrencyContainer from './components/Header/Currency/CurrencyContainer';
 import MainCartContainer from './components/MainCart/MainCartContainer';
 import PDPContainer from './components/PDP/PDPContainer';
+import Footer from './components/Footer/Footer.jsx';
 
 
 class App extends Component {
@@ -34,6 +35,7 @@ class App extends Component {
           <Route path="/cart" element={<div onClick={this.hideAllWindows}><MainCartContainer /></div>} />
           <Route path="/pdp/:itemId" element={<div onClick={this.hideAllWindows}><PDPContainer /></div>} />
         </Routes>
+        <Footer />
       </div>
     )
   }

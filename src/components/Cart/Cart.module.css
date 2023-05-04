@@ -1,21 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=Roboto&family=Roboto+Condensed:wght@700&family=Source+Sans+Pro&display=swap');
 
+.cart__container {
+   width: 1300px;
+   position: relative;
+}
+
 .cart {
    display: flex;
    flex-direction: column;
-
    z-index: 30;
    width: 325px;
    height: 677px;
+   position: absolute;
+   float: right;
+   clear: right;
    display: block;
-   position: fixed;
    background-color: rgb(255, 255, 255);
-   right: 280px;
-   top: 78px;
+   right: 125px;
+   top: 100px;
 }
 
 .cartWrapper {
-   overflow: auto;
+   overflow-y: auto;
+   overflow-x: hidden;
    height: 78%;
    display: flex;
    flex-direction: column;
@@ -273,4 +280,11 @@
    padding: 0 18px 18px 18px;
    justify-self: flex-end;
    align-self: flex-end;
+}
+
+@media (max-width: 600px) {
+   .cart {
+      right: 0px;
+      top: 140px;
+   }
 }

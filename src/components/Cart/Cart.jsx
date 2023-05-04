@@ -46,14 +46,17 @@ export default class Cart extends PureComponent {
          activeCurrency,
       } = this.props
       return (
-         <div className={classnames(s.cart__body)}>
-            <div className={s.cart__items}>
-               <CartItemsContainer
-                  activeCurrency={activeCurrency}
-                  items={items}
-               />
+         <div className={s.cart__container}>
+            <div className={classnames(s.cart__body)}>
+               <div className={s.cart__items}>
+                  <CartItemsContainer
+                     activeCurrency={activeCurrency}
+                     items={items}
+                  />
+               </div>
             </div>
          </div>
+
       )
    }
 

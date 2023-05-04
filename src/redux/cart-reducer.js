@@ -6,7 +6,6 @@ const SUBSTRACT_ITEM = "SUBTRACT_ITEM"
 const SET_TOTAL_PRICE = "SET_TOTAL_PRICE"
 const SET_TAXES = "SET_TAXES"
 
-
 let initialState = {
    isToggleCartReveal: false,
    items: [],

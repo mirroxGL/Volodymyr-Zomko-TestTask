@@ -2,8 +2,9 @@
   text-align: center;
 }
 
-html {
-  overflow-y: scroll;
+html,
+body {
+  overflow-x: hidden;
 }
 
 .App-logo {
@@ -19,7 +20,6 @@ html {
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

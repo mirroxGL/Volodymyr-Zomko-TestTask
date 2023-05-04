@@ -27,11 +27,13 @@ class Body extends PureComponent {
       return (
          <div className={s.bodyBlock}>
             <div className={classnames(s.bodyWrapper)}>
-               <div className={s.title}><span>{activeCategory}</span></div>
-               <div className={s.items}>
-                  {items.map((value, i) => <ItemContainer
-                     item={value}
-                     key={i} />)}
+               <div className={s.body__container}>
+                  <div className={s.title}><span>{activeCategory}</span></div>
+                  <div className={s.items}>
+                     {items.map((value, i) => <ItemContainer
+                        item={value}
+                        key={i} />)}
+                  </div>
                </div>
             </div>
          </div>

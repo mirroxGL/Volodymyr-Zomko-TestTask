@@ -1,11 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=Roboto&family=Roboto+Condensed:wght@700&family=Source+Sans+Pro&display=swap');
 
+.currency__container {
+   margin: 0 auto;
+   position: relative;
+   max-width: 1230px;
+   height: 100%;
+}
 
 .currency {
+   position: absolute;
+   float: right;
+   clear: right;
    background-color: white;
-   right: 295px;
-   top: 60px;
-   position: fixed;
+   right: 50px;
+   top: 100px;
    z-index: 100;
    padding: 20px 0;
    display: flex;
@@ -35,4 +43,17 @@
 
 .activeCurrency {
    background-color: #EEEEEE;
+}
+
+@media (min-width: 1230px) {
+   .currency {
+      right: 0px;
+   }
+}
+
+@media (max-width: 767px) {
+   .currency {
+      right: 75px;
+
+   }
 }
